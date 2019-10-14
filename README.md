@@ -36,6 +36,7 @@ console.log(this.validator.regExpInteger);// 非零正整数
 this.validator.isEmpty();
 this.validator.isRegExpUsename();
 this.validator.isRegExpPassword();
+this.validator.isRegExpEmail();
 this.validator.isRegExpPhone();
 this.validator.isRegExpTel();
 this.validator.isRegExpIdCard();
