@@ -1,0 +1,22 @@
+{
+  "name": "element-components",
+  "version": "1.0.10",
+  "description": "element-ui table,form,treeTable,upload,wangeditor,file-upload,preview Common Component Packaging",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xiaochi",
+  "license": "ISC",
+  "dependencies":{
+    "axios": "^0.19.0",
+    "element-ui": "^2.11.1",
+	"wangeditor": "^3.1.1",
+	"babel-preset-env": "^1.6.1",
+	"babel-preset-stage-0": "^6.24.1"
+  },
+  "repository":{
+    "type" : "git",
+	"url" : "http://github.com/npm/npm.git"
+  }
+}
