@@ -724,3 +724,5 @@ export default {
 	<component-wang-editor :height="350"></component-wang-editor>
 </div>
 ```
+#### License
+[MIT](https://opensource.org/licenses/MIT)
