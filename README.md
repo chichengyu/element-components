@@ -8,7 +8,7 @@
 
 #### Getting started
 ```
-npm install element-components -S
+npm install element-component -S
 ```
 
 ## Use
