@@ -180,7 +180,7 @@ export default {
 </script>
 ```
 #### treetable
-树形表格比表格 table 多了一个列属性 ** hasChildren:true **
+树形表格比表格 table 多了一个列属性 ``` hasChildren:true ```
 ```
 {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
 ```
