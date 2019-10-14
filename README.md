@@ -1,4 +1,4 @@
-# element-ui components
+# element-ui component
 
 #### 介绍
 
