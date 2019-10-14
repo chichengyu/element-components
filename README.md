@@ -182,9 +182,7 @@ export default {
 #### treetable
 树形表格比表格 table 多了一个列属性 ** hasChildren:true **
 ```
-{prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {
-                    return [params.row.name,{color:'red'}];
-                }},
+{prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
 ```
 数据结构多了一个children,
 ```
@@ -269,6 +267,7 @@ let data = [
 			status:0,
 			zip: 200333,
 			image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'}]
+	}
 ];
 ```
 #### form
