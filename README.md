@@ -49,10 +49,15 @@ this.validator.isRegExpInteger();
 #### message
 提供了 message, warning, success, error, confirm 的居中
 ```
+# message
 this.message(msg)
+# warning
 this.warning(msg)
+# success
 this.success(msg)
+# error
 this.error(msg)
+# confirm
 this.confirm(title,() => {
 	console.log('确定...');
 },() => {
