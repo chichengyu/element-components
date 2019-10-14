@@ -377,7 +377,10 @@ export default {
 		</template>
 		<!-- form 默认追加到表单结尾，如添加到表单开始，可以使用 formTop -->
 		<template slot="form">
-			<el-form-item label="扩展表单" prop="extend">
+			<el-form-item label="扩展表单1" prop="extend">
+				<el-input v-model="form.formFields.extend"></el-input>
+			</el-form-item>
+			<el-form-item label="扩展表单2" prop="extend">
 				<el-input v-model="form.formFields.extend"></el-input>
 			</el-form-item>
 		</template>
