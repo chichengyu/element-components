@@ -1,5 +1,5 @@
 {
-  "name": "element-components",
+  "name": "element-component",
   "version": "1.0.0",
   "description": "element-ui table,form,treeTable,upload,wangeditor,file-upload,preview Common Component Packaging",
   "main": "index.js",
