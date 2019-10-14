@@ -12,6 +12,8 @@ npm install element-components -S
 ```
 
 ## Use
+使用方法：可以查看下面的说明，也可以查看 example 下面的 demo
+
 默认在vue的prototype原型上注册了一个 axios
 ```
 console.log(this.axios);
