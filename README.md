@@ -23,8 +23,7 @@ npm install element-component -S
 <component-dialog></component-dialog>
 <component-preview></component-preview>
 <component-upload></component-upload>
-<component-file-upload></component-dialog>
-<component-dialog></component-file-upload>
+<component-file-upload></component-file-upload>
 <component-wang-editor></component-wang-editor>
 ```
 默认在vue的prototype原型上注册了一个 axios
