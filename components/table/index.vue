@@ -75,8 +75,7 @@
                             <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
                         </div>
                         <div v-else-if="col.slot">
-                            <slot :name="col.slot"></slot>
-                            <slot v-bind:params="scope"></slot>
+                            <slot :name="col.slot" v-bind:scope="scope"></slot>
                         </div>
                         <div v-else-if="col.render">
                             <div v-if="col.render(scope,col).length==2" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
@@ -92,26 +91,29 @@
                 :width="data.tableOption.width"
                 :align="data.tableOption.align||'center'">
                 <template slot-scope="scope">
-                    <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
-                        <el-button :key="key" v-if="!item.tooltip"
-                            :type="item.type"
-                            :style="item.style&&item.style(scope,item)"
-                            @click="item.click&&item.click(scope,item)"
-                            :size="item.size||'mini'"
-                            v-has="item.directives && item.directives.length && item.directives[0].value">
-                            {{ item.title }}
-                        </el-button>
-                        <el-popover v-else
-                            :ref="`popover${scope.$index}`"
-                            placement="top-end"
-                            width="120" style="margin-left: 10px">
-                            <div style="text-align: center; margin: 0">
-                                <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>{{ item.header||'你确定删除吗？'}}</h4>
-                                <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
-                                <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
-                            </div>
-                            <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type" :style="item.style&&item.style(scope,item)" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
-                        </el-popover>
+                    <slot v-if="data.tableOption.slot" name="button" v-bind:scope="scope" />
+                    <template v-else>
+                        <template v-if="data.tableOption.buttons" v-for="(item,key) in data.tableOption.buttons">
+                            <el-button :key="key" v-if="!item.tooltip"
+                                :type="item.type"
+                                :style="item.style&&item.style(scope,item)"
+                                @click="item.click&&item.click(scope,item)"
+                                :size="item.size||'mini'"
+                                v-has="item.directives && item.directives.length && item.directives[0].value">
+                                {{ item.title }}
+                            </el-button>
+                            <el-popover v-else
+                                :ref="`popover${scope.$index}`"
+                                placement="top-end"
+                                width="120" style="margin-left: 10px">
+                                <div style="text-align: center; margin: 0">
+                                    <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>{{ item.header||'你确定删除吗？'}}</h4>
+                                    <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
+                                    <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
+                                </div>
+                                <el-button v-has="item.directives && item.directives.length && item.directives[0].value" :type="item.type" :style="item.style&&item.style(scope,item)" size="mini" slot="reference">{{ item.title||'删除' }}</el-button>
+                            </el-popover>
+                        </template>
                     </template>
                 </template>
             </el-table-column>
@@ -171,7 +173,6 @@ export default {
             });*/
             for(var i=0;item.children && i<item.children.length;i++){
                 var child = item.children[i];
-                // this.data.tableData.splice(++index,0,child);
                 this.data.tableData.splice(++index,0,child);
                 if(child.children && child.children.length > 0 && child.open){
                     index = this.expand(child,index);
@@ -183,7 +184,6 @@ export default {
         collapse:function(item,index){
             if(!item.children)return index;
             item.open = false;
-            // this.data.tableData.splice(Number(index)+1,item.children.length);
             this.data.tableData.splice(Number(index)+1,util.size(item.children));
         },
         handleSort(params){this.data.sortChange && this.data.sortChange(params);},

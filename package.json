@@ -1,6 +1,6 @@
 {
   "name": "element-component",
-  "version": "1.0.0",
+  "version": "1.0.4,
   "description": "element-ui table,form,treeTable,upload,wangeditor,file-upload,preview Common Component Packaging",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,6 @@
     "axios": "^0.19.0",
     "element-ui": "^2.11.1",
 	"wangeditor": "^3.1.1",
-	"babel-preset-env": "^1.6.1",
-	"babel-preset-stage-0": "^6.24.1"
   },
   "repository":{
     "type" : "git",

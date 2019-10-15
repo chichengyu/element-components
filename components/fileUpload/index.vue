@@ -57,12 +57,15 @@ export default {
             type:String,
             default:'small'
         },
+        headers:{
+            type:Object,
+            default:function () {return {};}
+        },
         params:[String,Number,Object,Array]
     },
     data() {
         return {
             visible: false,
-            headers:{token:this.$store.getters.userInfo.token||'1231321'},
             fileImageList:[]
         };
     },

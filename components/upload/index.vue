@@ -64,6 +64,10 @@ export default {
             type:Object,
             default:() => {}
         },
+        headers:{
+            type:Object,
+            default:() => {}
+        },
         previewImages:[String,Array],
         autoUpload:{
             type:Boolean,
@@ -79,7 +83,6 @@ export default {
         return {
             dialogImageUrl: '',
             visible: false,
-            headers:{token:this.$store.getters.userInfo.token||''},
             fileImageList:[]
         };
     },

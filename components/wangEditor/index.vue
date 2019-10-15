@@ -42,6 +42,10 @@ export default {
 			type: Boolean,
 			default: true
 		},
+        headers:{
+		  type:Object,
+          defailt:function () {return {};}
+        },
 		debug:{
 			type:Boolean,
 			default: false
@@ -73,9 +77,7 @@ export default {
 			this.editor.customConfig.uploadImgMaxLength = 5;
 			this.editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024;
 			this.editor.customConfig.uploadImgTimeout = 3 * 60 * 1000;
-			this.editor.customConfig.uploadImgHeaders  = {
-				token:this.$store.getters.userInfo.token
-			}
+			this.editor.customConfig.uploadImgHeaders  = this.headers;
 			this.editor.customConfig.menus = [
 				'head',
 				'bold',

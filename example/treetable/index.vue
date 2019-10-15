@@ -1,6 +1,21 @@
 <template>
     <div class="table">
-        <component-table v-if="tableData.tableData.length>0" :data="tableData"></component-table>
+        <component-table v-if="tableData.tableData.length>0" :data="tableData">
+
+            <!-- 列，abc，col 随意取的，需要在 tableLabel 中定义 slot:'abc'、slot:'col'，scope为当前行参数 -->
+            <!-- ***** 注意：slot的命名必须不能相同 ***** -->
+            <template v-slot:abc="{scope}">
+                <span>这是表格列扩展--作用域插槽1111--id：{{scope.row.id}}</span>
+            </template>
+            <template v-slot:col="{scope}">
+                <span>这是表格列扩展--作用域插槽2222--省：{{scope.row.province}}</span>
+            </template>
+
+            <!-- 按钮扩展： 需要在 tableOption 里加上 slot:true --->
+            <template v-slot:button="{scope}">
+                <el-button type="warning" size="mini" @click="handleClick(scope)">按钮 </el-button>
+            </template>
+        </component-table>
     </div>
 </template>
 
@@ -20,6 +35,7 @@ export default {
                 tableOption:{
                     label:'操作',
                     width:230,
+                    slot:true,// 按钮操作扩展
                     buttons:[
                         {prop:'detail',title:'查看',click:(params,currentBtn) => {
                             console.log(params);
@@ -74,8 +90,8 @@ export default {
                     // console.log(params);
                     return [params.row.date];
                 }},
-                {prop:'province',title:'省份'},
-                {prop:'city',title:'城市'},
+                {prop:'province',title:'省份',slot:'abc'},
+                {prop:'city',title:'城市',slot:'col'},
                 {prop:'address',title:'地址',tooltip:true},
                 {prop:'zip',title:'邮编',sort:'custom'},
                 {prop:'status',title:'状态',isSwitch:true,activeText:'正常',inactiveText:'禁用',change:(currentData) => {console.log('switch开关',currentData)}}
@@ -175,6 +191,9 @@ export default {
                         image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'}]}];
             this.tableData.tableData = data;
         },
+        handleClick(scope){
+            console.log(scope);
+        }
     },
 }
 </script>
