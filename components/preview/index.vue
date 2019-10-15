@@ -31,19 +31,17 @@ export default {
             default: false
         }
     },
-    data() {
-        return {};
-    },
+    data:function() {return {};},
     computed:{
         visibled:{
-            get(){
+            get:function(){
                 return this.$attrs.visible;
             },
-            set(){}
+            set:function(){}
         }
     },
     methods: {
-        handleClose(done) {
+        handleClose:function(done) {
             this.$emit('update:visible',false);
             done();
         }

@@ -128,27 +128,27 @@ export default {
     props:{
         data:{
             type:Object,
-            default:() => {}
+            default:function () {return {};}
         },
     },
-    data() {return {count:0,visibled:false,previewUrl:''}},
+    data:function(){return {count:0,visibled:false,previewUrl:''}},
     watch:{
         data:{
             immediate:true,
             deep:true,
-            handler(val){(this.count === 1) && util.treeTableXcode(val.tableData);}
+            handler:function(val){(this.count === 1) && util.treeTableXcode(val.tableData);}
         }
     },
-    created(){
+    created:function(){
         util.treeTableXcode(this.data.tableData);
         this.count = 1;
     },
     methods: {
-        handleOk(currentBtn,scope){
+        handleOk:function(currentBtn,scope){
             scope._self.$el.click();
             currentBtn.click.ok && currentBtn.click.ok(scope,currentBtn);
         },
-        handleCancel(currentBtn,scope){
+        handleCancel:function(currentBtn,scope){
             scope._self.$el.click();
             currentBtn.click.cancel && currentBtn.click.cancel(scope,currentBtn);
         },
@@ -185,8 +185,8 @@ export default {
             item.open = false;
             this.data.tableData.splice(Number(index)+1,util.size(item.children));
         },
-        handleSort(params){this.data.sortChange && this.data.sortChange(params);},
-        handlePreview(src){
+        handleSort:function(params){this.data.sortChange && this.data.sortChange(params);},
+        handlePreview:function(src){
             this.previewUrl = src;
             this.visibled = true;
         }
@@ -210,7 +210,8 @@ util.treeTableXcode = function(data,xcode,xgrade){
     }
 };
 util.size = function (data) {
-    let len = data.length || 0;
+    var len = 0;
+    if(data.length)len = data.length;
     for(var i=0;i<data.length;i++){
         if (data[i].open && data[i].children){
             len += util.size(data[i].children)

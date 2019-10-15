@@ -12,7 +12,7 @@ import E from 'wangeditor'
 
 export default {
 	name: "wangEditor",
-	data () {
+	data:function() {
 		return {
 			editor:null,
 			content:'',
@@ -52,7 +52,7 @@ export default {
 		}
 	},
 	watch: {
-		isClear(val) {
+		isClear:function(val) {
 			if (val) {
 				this.editor.txt.clear();
 				this.content = null;
@@ -64,12 +64,12 @@ export default {
 			}
 		}
 	},
-	mounted () {
+	mounted:function() {
 		this.setEditor();
 		this.editor.txt.html(this.value)
 	},
 	methods:{
-		setEditor () {
+		setEditor:function() {
 			this.editor = new E(this.$refs.toolbar, this.$refs.editor);
 			this.editor.customConfig.zIndex = 0;
 			this.editor.customConfig.uploadFileName = 'file';
@@ -108,21 +108,21 @@ export default {
 				this.editor.customConfig.uploadImgShowBase64 = true;
 			}
 			this.editor.customConfig.uploadImgHooks = {
-				fail: (xhr, editor, result) => {
+				fail: function(xhr, editor, result){
 
 				},
-				success: (xhr, editor, result) => {
+				success: function(xhr, editor, result){
 
 				},
-				timeout: (xhr, editor) => {
+				timeout: function(xhr, editor){
 
 				},
-				error: (xhr, editor) => {
+				error: function(xhr, editor){
 
 				},
-				customInsert: (insertImg, result, editor) => {
+				customInsert: function(insertImg, result, editor){
 					if (result.data && result.data.length) {
-						for (let i = 0; i < result.data.length; i++) {
+						for (var i = 0; i < result.data.length; i++) {
 							var url = result.data[i].ivew_path;
 							insertImg(url);
 						}
@@ -131,7 +131,7 @@ export default {
 					}
 				}
 			};
-			this.editor.customConfig.onchange = (html) => {
+			this.editor.customConfig.onchange = function(html){
 				this.content = html;
 				this.$emit('change', this.content)
 			}

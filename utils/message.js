@@ -1,40 +1,42 @@
 import ElementUI from "element-ui";
-export const message = function (msg) {
+export var message = function (msg) {
     ElementUI.Message({
         message: msg,
         center: true
     });
 };
-export const warning = function (msg) {
+export var warning = function (msg) {
     ElementUI.Message({
         message: msg,
         type: 'warning',
         center: true
     });
 };
-export const success = function (msg) {
+export var success = function (msg) {
     ElementUI.Message({
         message: msg,
         type: 'success',
         center: true
     });
 };
-export const error = function (msg) {
+export var error = function (msg) {
     ElementUI.Message({
         message: msg,
         type: 'error',
         center: true
     });
 };
-export const confirm = function (title,success,error,options={},content='') {
+export var confirm = function (title,success,error,options,content) {
+    if (!options)options={};
+    if (!content)content='';
     ElementUI.MessageBox.confirm(content, title, Object.assign({
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
         center: 'center',
-    },options)).then(() => {
+    },options)).then(function(){
         return success && success();
-    }).catch(() => {
+    }).catch(function(){
         return error && error();
     });
 };

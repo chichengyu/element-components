@@ -10,7 +10,7 @@ import validate from './utils/validate.js'
 import { message, warning, success, error, confirm} from './utils/message.js'
 
 export default {
-    install(Vue, options) {
+    install:function(Vue, options) {
         Vue.prototype.axios = axios;
         Vue.prototype.validator = validate;
         Vue.prototype.message = message;

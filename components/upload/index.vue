@@ -62,11 +62,11 @@ export default {
         },
         data:{
             type:Object,
-            default:() => {}
+            default:function () {return {};}
         },
         headers:{
             type:Object,
-            default:() => {}
+            default:function () {return {};}
         },
         previewImages:[String,Array],
         autoUpload:{
@@ -79,7 +79,7 @@ export default {
         },
         params:[String,Number,Object,Array],
     },
-    data() {
+    data:function() {
         return {
             dialogImageUrl: '',
             visible: false,
@@ -89,14 +89,14 @@ export default {
     watch:{
         previewImages:{
             immediate:true,
-            handler(val){
+            handler:function(val){
                 if (val){
-                    let type = typeof val;
+                    var type = typeof val;
                     if (type == 'string'){
                         this.fileImageList = [{name:'01',url:val}];
                     }else if (type == 'object'){
-                        let arr = [];
-                        for (let key in val) {
+                        var arr = [];
+                        for (var key in val) {
                             arr.push({name:key,url:val[key]});
                         }
                         this.fileImageList = arr;
@@ -106,17 +106,19 @@ export default {
         },
     },
     methods: {
-        handleRemove(file) {
-            this.$emit('remove',file,this.fileImageList,this.params,()=>{
+        handleRemove:function(file) {
+            this.$emit('remove',file,this.fileImageList,this.params,function(){
                 this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
-            },(delImageUrl,params,callBack,type='post',header={})=>{
+            },function(delImageUrl,params,callBack,type,header){
+                if (!type)type='post';
+                if (!header)header={};
                 if (delImageUrl && params) {
                     this.axios.request({
                         url:delImageUrl,
                         method:type,
                         headers:header,
                         data:params
-                    }).then(res => {
+                    }).then(function(res){
                         if (res.data.code == 1){
                             this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
                             this.success('删除成功！');
@@ -124,7 +126,7 @@ export default {
                             this.error('删除失败！');
                         }
                         return callBack && callBack(res);
-                    }).catch(err => {
+                    }).catch(function(err){
                         return Promise.reject('删除失败！',err);
                     });
                 }else{
@@ -132,16 +134,16 @@ export default {
                 }
             });
         },
-        handlePictureCardPreview(file) {
+        handlePictureCardPreview:function(file) {
             this.dialogImageUrl = file.url;
             this.visible = true;
         },
-        handleBefore(file){
+        handleBefore:function(file){
             return this.$emit('before',file,this.params);
         },
-        handleSuccess(response, file, fileList){
+        handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList,this.params,(success,error)=>{
+            this.$emit('success',response, file, fileList,this.params,function(success,error){
                 if (response.code == 1){
                     this.success('上传成功！');
                     return success && success();
@@ -151,7 +153,7 @@ export default {
                 }
             });
         },
-        handleError(err, file, fileList){
+        handleError:function(err, file, fileList){
             this.$emit('error',err, file, fileList,this.params);
         }
     }

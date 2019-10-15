@@ -39,7 +39,7 @@ export default {
         },
         data:{
             type:Object,
-            default:() => {}
+            default:function () {return {};}
         },
         autoUpload:{
             type:Boolean,
@@ -63,21 +63,21 @@ export default {
         },
         params:[String,Number,Object,Array]
     },
-    data() {
+    data:function() {
         return {
             visible: false,
             fileImageList:[]
         };
     },
     methods: {
-        handleBefore(file){
+        handleBefore:function(file){
             this.$emit('before',file,this.params);
         },
-        handleSuccess(response, file, fileList){
+        handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
             this.$emit('success',response, file, fileList,this.params);
         },
-        handleError(err, file, fileList){
+        handleError:function(err, file, fileList){
             this.$emit('error',err, file, fileList,this.params);
         }
     }

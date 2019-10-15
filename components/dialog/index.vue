@@ -40,11 +40,11 @@ export default {
         }
     },
     methods: {
-        handleClose(done) {
+        handleClose:function(done) {
             this.$emit('update:visible',false);
             done();
         },
-        handleDialog(key){
+        handleDialog:function(key){
             this.$parent.hasOwnProperty(key) && this.$parent[key]();
             this.$emit('update:visible',false);
         }
