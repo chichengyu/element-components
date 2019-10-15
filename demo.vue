@@ -585,7 +585,7 @@ export default {
       console.log(params,params);
     },
     handleExcelError(response, file, fileList,params){
-      tconsole.log(params);
+      console.log(params);
     },
   }
 }
