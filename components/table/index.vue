@@ -117,7 +117,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
+        <el-pagination v-if="data.page" :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
         <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false"><img :src="previewUrl" width="100%" height="100%" alt=""></el-dialog>
     </div>
 </template>
@@ -128,7 +128,7 @@ export default {
     props:{
         data:{
             type:Object,
-            default:function () {return {};}
+            requred:true
         },
     },
     data:function(){return {count:0,visibled:false,previewUrl:''}},
