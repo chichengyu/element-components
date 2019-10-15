@@ -14,7 +14,7 @@ npm install element-component -S
 ```
 
 ## Use
-使用方法：可以查看下面的说明，也可以查看 example 下面的 demo
+使用方法：可以查看下面的说明，也可以查看 example 下面的 demo，也可以[点此阅读文档](https://www.kancloud.cn/qq875267425/element-ui/1333290)
 
 ```
 # 所有组件
