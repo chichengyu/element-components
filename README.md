@@ -138,11 +138,11 @@ tableData: {
 					return 123;
 				}
 			},
-			{title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',click:(params,currentBtn) => {
+			{title:'编辑',type:'primary',click:(params,currentBtn) => {
 				console.log(params);
 				console.log(currentBtn);
 			}},
-			{title:'删除',header:'确定要删除吗？',tooltip:true,directives:[{name:'has',value:'del'}],type:'danger',click:{
+			{title:'删除',header:'确定要删除吗？',tooltip:true,type:'danger',click:{
 				ok:(params,currentBtn) => {
 					console.log('确认删除',params);
 					console.log(currentBtn);
