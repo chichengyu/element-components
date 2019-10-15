@@ -47,18 +47,18 @@ console.log(this.validator.regExpDate);// 日期
 console.log(this.validator.regExpUrl);// URL
 console.log(this.validator.regExpInteger);// 非零正整数
 # 方法
-this.validator.isEmpty();
-this.validator.isRegExpUsename();
-this.validator.isRegExpPassword();
-this.validator.isRegExpEmail();
-this.validator.isRegExpPhone();
-this.validator.isRegExpTel();
-this.validator.isRegExpIdCard();
-this.validator.isRegExpIp();
-this.validator.isRegExpChinese();
-this.validator.isRegExpDate();
-this.validator.isRegExpUrl();
-this.validator.isRegExpInteger();
+this.validator.isEmpty(val);// 判空
+this.validator.isRegExpUsename(val);
+this.validator.isRegExpPassword(val);
+this.validator.isRegExpEmail(val);
+this.validator.isRegExpPhone(val);
+this.validator.isRegExpTel(val);
+this.validator.isRegExpIdCard(val);
+this.validator.isRegExpIp(val);
+this.validator.isRegExpChinese(val);
+this.validator.isRegExpDate(val);
+this.validator.isRegExpUrl(val);
+this.validator.isRegExpInteger(val);
 ```
 #### message
 提供了 message, warning, success, error, confirm 的居中
@@ -464,7 +464,7 @@ form:{
 		],
 		extend: [
 			{ required: true, message: '请填写表单扩展', trigger: 'blur' },
-			{pattern:this.$validator.regExpChinese,message: '表单扩展输入不正确', trigger: 'blur'}
+			{pattern:this.validator.regExpChinese,message: '表单扩展输入不正确', trigger: 'blur'}
 		]
 	}
 },
