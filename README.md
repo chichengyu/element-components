@@ -2,7 +2,7 @@
 
 #### 介绍
 
-基于element-ui做的element-ui，table，form，treeTable，upload，wangeditor，file-upload，preview封装，方便使用,
+基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，方便使用,
 
 *注：本人这里使用的是 element-ui@2.11.1，vue@2.6。
 
