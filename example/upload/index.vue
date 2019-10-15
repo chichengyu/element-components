@@ -45,33 +45,15 @@ export default {
         handleBefore(file,params){
             console.log(file);
         },
-        handleSuccess(response, file, fileList,params,callback){
+        handleSuccess(response, file, fileList,params){
             console.log(response);
-            /** callback 上传完成提示后的回调
-             * 参数一：上传成功后的回调
-             * 参数二：上传失败后的回调
-             * callBack(() => {},() => {})
-             */
-            callback(() => {
-                console.log('上传成功后的逻辑');
-            },() => {
-                console.log('上传失败后的逻辑');
-            });
         },
-        handleRemove(file,fileImageList,params,callBack,autoRequestCallBack){
+        handleRemove(file,fileImageList,params){
             console.log('删除图片',file);
             console.log(fileImageList);
             console.log(params);
             // fileImageList 已显示的图片列表数组，可以执行如代码进行删除显示图片，fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
-            // callBack 函数，执行后 删除界面上看到的图片列表
-            /** autoRequestCallBack 函数，执行后自动请求服务器删除界面上看到的图片列表
-             * post方式,接收辆个个参数
-             * 参数一：为要删除的图片服务器接口
-             * 参数二：为要传递的数据
-             * 参数三：为要请求后，可能需要做的逻辑处理，默认 function
-             * 参数四：为要请求接口的方式，默认post
-             * 参数五：为要设置的请求头，默认 {}
-             */
+            fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
         },
         handleExcelBefore(file,params){
             console.log(params);

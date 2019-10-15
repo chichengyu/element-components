@@ -107,32 +107,7 @@ export default {
     },
     methods: {
         handleRemove:function(file) {
-            this.$emit('remove',file,this.fileImageList,this.params,function(){
-                this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1)
-            },function(delImageUrl,params,callBack,type,header){
-                if (!type)type='post';
-                if (!header)header={};
-                if (delImageUrl && params) {
-                    this.axios.request({
-                        url:delImageUrl,
-                        method:type,
-                        headers:header,
-                        data:params
-                    }).then(function(res){
-                        if (res.data.code == 1){
-                            this.fileImageList.includes(file) && this.fileImageList.splice(this.fileImageList.indexOf(file),1);
-                            this.success('删除成功！');
-                        }else{
-                            this.error('删除失败！');
-                        }
-                        return callBack && callBack(res);
-                    }).catch(function(err){
-                        return Promise.reject('删除失败！',err);
-                    });
-                }else{
-                    throw new Error('两个参数：接口地址或与数据必须传递！');return;
-                }
-            });
+            this.$emit('remove',file,this.fileImageList,this.params);
         },
         handlePictureCardPreview:function(file) {
             this.dialogImageUrl = file.url;
@@ -143,15 +118,7 @@ export default {
         },
         handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList,this.params,function(success,error){
-                if (response.code == 1){
-                    this.success('上传成功！');
-                    return success && success();
-                }else{
-                    this.error('上传失败！');
-                    return error && error();
-                }
-            });
+            this.$emit('success',response, file, fileList,this.params);
         },
         handleError:function(err, file, fileList){
             this.$emit('error',err, file, fileList,this.params);
