@@ -595,6 +595,26 @@ export default {
 <div id="editor">
 	<component-wang-editor :height="350"></component-wang-editor>
 </div>
+
+<div id="editor">
+	<component-wang-editor :height="350"  :uploadUrl='url' :value='conten' :isClear='true' :isdisable='true' :headers='headers' :debug='true' @change='handleChange'></component-wang-editor>
+</div>
+
+export default {
+    data () {
+        uploadUrl:'上传图片地址',
+        value:'富文本内容',
+        isClear:'是否清空',
+        isdisable:'是否禁用',
+        headers:'请求头设置',
+        debug:'开启debug模式'
+    }，
+    methods:{
+        handleChange(val){
+            console.log(val);
+        }
+    }
+}
 ```
 #### License
 [MIT](https://opensource.org/licenses/MIT)
