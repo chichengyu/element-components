@@ -16,6 +16,17 @@ npm install element-component -S
 ## Use
 使用方法：可以查看下面的说明，也可以查看 example 下面的 demo
 
+```
+# 所有组件
+<component-form></component-form>
+<component-table></component-table>
+<component-dialog></component-dialog>
+<component-preview></component-preview>
+<component-upload></component-upload>
+<component-file-upload></component-dialog>
+<component-dialog></component-file-upload>
+<component-wang-editor></component-wang-editor>
+```
 默认在vue的prototype原型上注册了一个 axios
 ```
 console.log(this.axios);

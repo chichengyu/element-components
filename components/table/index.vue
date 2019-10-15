@@ -24,7 +24,7 @@
                     <el-switch class="switchStyle" v-if="col.isSwitch"
                         :style="col.style&&col.style(scope,col)"
                         :disabled="col.disabled"
-                        v-model="scope.row.status"
+                        v-model="scope.row[col.prop]"
                         active-color="#52BEA6"
                         inactive-color="#ccc"
                         :active-value="1"
