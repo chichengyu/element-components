@@ -1,13 +1,14 @@
 <template>
-    <el-dialog
-        :title="title"
-        :visible.sync="visibled"
-        :width="width+'%'"
-        :close-on-click-modal="false"
-        :append-to-body="appendToBody"
-        :before-close="handleClose">
-        <img :src="src" width="100%" height="100%" alt="">
-    </el-dialog>
+    <div class="preivew" style="display:inline-block;margin-right:6px;vertical-align:middle;">
+        <img :src="src" :width="width" :height="height" :title="title" @click="visible=true" style="cursor: pointer">
+        <el-dialog
+            :title="title"
+            :visible.sync="visible"
+            :close-on-click-modal="false"
+            :append-to-body="appendToBody">
+            <img :src="src" width="100%" height="100%" alt="">
+        </el-dialog>
+    </div>
 </template>
 
 <script>
@@ -20,7 +21,11 @@ export default {
         },
         width:{
             type:Number,
-            default:30
+            default:58
+        },
+        height:{
+            type:Number,
+            default:58
         },
         title:{
             type:String,
@@ -31,21 +36,7 @@ export default {
             default: false
         }
     },
-    data:function() {return {};},
-    computed:{
-        visibled:{
-            get:function(){
-                return this.$attrs.visible;
-            },
-            set:function(){}
-        }
-    },
-    methods: {
-        handleClose:function(done) {
-            this.$emit('update:visible',false);
-            done();
-        }
-    }
+    data:function() {return {visible:false}}
 }
 </script>
 
