@@ -64,13 +64,13 @@ this.validator.isRegExpInteger(val);
 提供了 message, warning, success, error, confirm 的居中
 ```
 # message
-this.message(msg)
+this.message(msg,callback,duration)
 # warning
-this.warning(msg)
+this.warning(msg,callback,duration)
 # success
-this.success(msg)
+this.success(msg,callback,duration)
 # error
-this.error(msg)
+this.error(msg,callback,duration)
 # confirm
 this.confirm(title,() => {
 	console.log('确定...');

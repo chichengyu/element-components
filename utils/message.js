@@ -1,29 +1,41 @@
 import ElementUI from "element-ui";
-export var message = function (msg) {
+export var message = function (msg,callback,duration) {
+    if (!duration)duration=3000;
     ElementUI.Message({
         message: msg,
-        center: true
+        center: true,
+        duration:duration,
+        onClose:function () {return callback && callback()}
     });
 };
-export var warning = function (msg) {
+export var warning = function (msg,callback,duration) {
+    if (!duration)duration=3000;
     ElementUI.Message({
         message: msg,
         type: 'warning',
-        center: true
+        center: true,
+        duration:duration,
+        onClose:function () {return callback && callback()}
     });
 };
-export var success = function (msg) {
+export var success = function (msg,callback,duration) {
+    if (!duration)duration=3000;
     ElementUI.Message({
         message: msg,
         type: 'success',
-        center: true
+        center: true,
+        duration:duration,
+        onClose:function () {return callback && callback()}
     });
 };
-export var error = function (msg) {
+export var error = function (msg,callback,duration) {
+    if (!duration)duration=3000;
     ElementUI.Message({
         message: msg,
         type: 'error',
-        center: true
+        center: true,
+        duration:duration,
+        onClose:function () {return callback && callback()}
     });
 };
 export var confirm = function (title,success,error,options,content) {
