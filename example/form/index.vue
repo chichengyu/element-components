@@ -68,7 +68,7 @@ export default {
                     extend2:'扩展表单2',
                 },
                 formLabel:[
-                    {prop: 'id', title: '编号', type: 'text',tag:'span'},
+                    {prop: 'id', title: '编号', type: 'text',tag:'span',style:{color:'red'},render:(val){return val}},
                     {prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
                     {prop: 'nameLine', title: '同行显示', type: 'input',formItemStyle:{width:'500px'},style:{display:'inline-block',width:'100px',transform:'translateX(27px)'}},
                     {prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},

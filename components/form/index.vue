@@ -4,8 +4,8 @@
             <slot name="formTop" v-bind:formTop="$refs"/>
             <el-form-item v-for="(item,index) in data.formLabel" :key="index" :label="item.title" :prop="item.prop" :style="item.formItemStyle||''">
                 <template v-if="item.type==='text'">
-                    <span v-if="item.tag==='span'">{{ data.formFields[item.prop] }}</span>
-                    <div v-else>{{ data.formFields[item.prop] }}</div>
+                    <span v-if="item.tag==='span'" :style="item.style">{{ item.render?item.render(data.formFields[item.prop]):data.formFields[item.prop] }}</span>
+                    <div v-else :style="item.style">{{ item.render?item.render(data.formFields[item.prop]):data.formFields[item.prop] }}</div>
                 </template>
                 <el-input v-if="item.type==='input'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :show-password="item.password" :size="item.size" :disabled="item.disabled" :style="item.style||''" :prefix-icon="item.prefixIcon||''" :placeholder="item.placeholder"></el-input>
                 <el-input-number v-if="item.type==='inputNumber'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :min="item.min" :max="item.max" :step="item.step" :size="item.size" :disabled="item.disabled" :style="item.style||''"></el-input-number>
