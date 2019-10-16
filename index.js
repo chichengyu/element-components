@@ -7,7 +7,7 @@ import upload from './components/upload'
 import fileUpload from './components/fileUpload'
 import wangEditor from './components/wangEditor'
 import validate from './utils/validate.js'
-import { message, warning, success, error, confirm} from './utils/message.js'
+import { message, warning, success, error, alert, prompt, confirm} from './utils/message.js'
 
 export default {
     install:function(Vue, options) {
@@ -17,6 +17,8 @@ export default {
         Vue.prototype.warning = warning;
         Vue.prototype.success = success;
         Vue.prototype.error = error;
+        Vue.prototype.alert = alert;
+        Vue.prototype.prompt = prompt;
         Vue.prototype.confirm = confirm;
         Vue.prototype.ObjectforIn = this.objForeach;
 

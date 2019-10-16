@@ -14,7 +14,7 @@ npm install element-component -S
 ```
 
 ## Use
-使用方法：可以查看下面的说明，也可以查看 example 下面的 demo，也可以[点此阅读文档](https://www.kancloud.cn/qq875267425/element-ui/1333290)
+使用方法：可以查看下面的说明，也可以查看 example 下面的 demo，也可以[点此查看使用方法](https://www.kancloud.cn/qq875267425/element-ui/1333290)
 
 ```
 # 所有组件
@@ -71,6 +71,18 @@ this.warning(msg,callback,duration)
 this.success(msg,callback,duration)
 # error
 this.error(msg,callback,duration)
+# alert
+this.alert(title,() => {
+	console.log('确定...');
+},() => {
+	console.log('取消...');
+},options={},content='')
+# prompt
+this.prompt(title,() => {
+	console.log('确定...');
+},() => {
+	console.log('取消...');
+},options={},content='')
 # confirm
 this.confirm(title,() => {
 	console.log('确定...');
