@@ -587,7 +587,7 @@ export default {
 #### preview
 ```
 <div class="Preview">
-	<component-preview :title="'查看原图'" :src="url" :appendToBody="true"></component-preview>
+	<component-preview :title="'查看原图'" :src="url" :width="100" :height="100" :appendToBody="true"></component-preview>
 	<hr>
 	<component-preview v-for="(item,index) in images" :key="index" :title="'查看原图'" :src="item" :appendToBody="true"></component-preview>
 
