@@ -1,16 +1,21 @@
 <template>
     <div class="preivew" style="display:inline-block;margin-right:6px;vertical-align:middle;">
-        <div class="img" @click="visible=true">
-            <span><i class="el-icon-zoom-in"></i></span>
-            <img :src="src" :width="width" :height="height" :title="title" style="border-radius:6px;vertical-align:middle">
-        </div>
-        <el-dialog
-            :title="title"
-            :visible.sync="visible"
-            :close-on-click-modal="false"
-            :append-to-body="appendToBody">
-            <img :src="src" width="100%" height="100%" alt="">
-        </el-dialog>
+        <template v-if="src">
+            <div class="img" @click="visible=true">
+                <span><i class="el-icon-zoom-in"></i></span>
+                <img :src="src" :width="width" :height="height" :title="title" style="border-radius:6px;vertical-align:middle">
+            </div>
+            <el-dialog
+                :title="title"
+                :visible.sync="visible"
+                :close-on-click-modal="false"
+                :append-to-body="appendToBody">
+                <img :src="src" width="100%" height="100%" alt="">
+            </el-dialog>
+        </template>
+        <template v-else>
+            <span>无</span>
+        </template>
     </div>
 </template>
 
