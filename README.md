@@ -35,7 +35,7 @@ console.log(this.axios);
 ```
 console.log(this.validator);
 # 正则
-console.log(this.validator.regExpUsename);// 用户名
+console.log(this.validator.regExpUsername);// 用户名
 console.log(this.validator.regExpPassword);// 密码
 console.log(this.validator.regExpEmail);// email
 console.log(this.validator.regExpPhone);// 手机
@@ -48,7 +48,7 @@ console.log(this.validator.regExpUrl);// URL
 console.log(this.validator.regExpInteger);// 非零正整数
 # 方法
 this.validator.isEmpty(val);// 判空
-this.validator.isRegExpUsename(val);
+this.validator.isRegExpUsername(val);
 this.validator.isRegExpPassword(val);
 this.validator.isRegExpEmail(val);
 this.validator.isRegExpPhone(val);
