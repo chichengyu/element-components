@@ -1,6 +1,6 @@
 export default {
     //用户名正则，4到16位（字母，数字，下划线，减号）
-    regExpUsename:/^[a-zA-Z0-9_-]{4,16}$/,
+    regExpUsername:/^[a-zA-Z0-9_-]{4,16}$/,
     // 密碼8到16位（字母，数字，下划线，减号）任意组合
     regExpPassword:/^[a-zA-Z0-9_-]{8,16}$/,
     //Email正则
