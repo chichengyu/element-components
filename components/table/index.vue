@@ -128,7 +128,7 @@ export default {
     props:{
         data:{
             type:Object,
-            requred:true
+            required:true
         },
     },
     data:function(){return {count:0,visibled:false,previewUrl:''}},
