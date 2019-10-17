@@ -621,7 +621,7 @@ export default {
 	
 	<hr/>
 	
-	<component-wang-editor :height="350" @fail="handleFail" @change="change" style="width: 600px;"></component-wang-editor>
+	<component-wang-editor style="width: 600px;" :height="350" @fail="handleFail" @fail="handleFail" @success="handleSuccess" @timeout="handleTimeout" @error="handleError" @change="change"></component-wang-editor>
 
 </div>
 
