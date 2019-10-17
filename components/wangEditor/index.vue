@@ -1,8 +1,8 @@
 <template>
-    <div class="editor">
+    <div class="editor" style="background-color:#fff;">
         <div ref="toolbar" class="toolbar">
         </div>
-        <div ref="editor" class="text" :style="style">
+        <div ref="editor" class="text" :style="{height:height+'px'}">
         </div>
     </div>
 </template>
@@ -15,10 +15,7 @@ export default {
 	data:function() {
 		return {
 			editor:null,
-			content:'',
-			style:{
-				height: this.height+'px'
-			}
+			content:''
 		}
 	},
 	props:{
@@ -107,18 +104,19 @@ export default {
 			}else {
 				this.editor.customConfig.uploadImgShowBase64 = true;
 			}
+            var _this = this;
 			this.editor.customConfig.uploadImgHooks = {
 				fail: function(xhr, editor, result){
-
+                    _this.$emit('fail', xhr, editor, result);
 				},
 				success: function(xhr, editor, result){
-
+                    _this.$emit('success', xhr, editor, result);
 				},
 				timeout: function(xhr, editor){
-
+                    _this.$emit('timeout', xhr, editor);
 				},
 				error: function(xhr, editor){
-
+                    _this.$emit('error', xhr, editor);
 				},
 				customInsert: function(insertImg, result, editor){
 					if (result.data && result.data.length) {
@@ -132,8 +130,8 @@ export default {
 				}
 			};
 			this.editor.customConfig.onchange = function(html){
-				this.content = html;
-				this.$emit('change', this.content)
+                _this.content = html;
+                _this.$emit('change', _this.content);
 			}
 			if (this.debug){
 				this.editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1');

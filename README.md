@@ -617,7 +617,12 @@ export default {
 </div>
 
 <div id="editor">
-	<component-wang-editor :height="350"  :uploadUrl='url' :value='conten' :isClear='true' :isdisable='true' :headers='headers' :debug='true' @change='handleChange'></component-wang-editor>
+	<component-wang-editor style="width: 600px;" :height="350"  :uploadUrl='url' :value='conten' :isClear='true' :isdisable='true' :headers='headers' :debug='true' @change='handleChange'></component-wang-editor>
+	
+	<hr/>
+	
+	<component-wang-editor :height="350" @fail="handleFail" @change="change" style="width: 600px;"></component-wang-editor>
+
 </div>
 
 export default {
@@ -632,6 +637,18 @@ export default {
     methods:{
         handleChange(val){
             console.log(val);
+        },
+		handleFail(xhr, editor, result){
+            console.log(result);
+        },
+        handleSuccess(xhr, editor, result){
+            console.log(result);
+        },
+        handleTimeout(xhr, editor){
+            console.log(editor);
+        },
+        handleError(xhr, editor){
+            console.log(editor);
         }
     }
 }

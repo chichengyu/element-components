@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         handleBefore:function(file){
-            this.$emit('before',file,this.params);
+            return this.$emit('before',file,this.params);
         },
         handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
