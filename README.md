@@ -2,7 +2,7 @@
 
 #### 介绍
 
-基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，方便使用,
+基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用,
 
 *注：本人这里使用的是 element-ui@2.11.1，vue@2.6。
 
@@ -21,6 +21,7 @@ npm install element-component -S
 <component-form></component-form>
 <component-table></component-table>
 <component-dialog></component-dialog>
+<component-popover></component-popover>
 <component-preview></component-preview>
 <component-upload></component-upload>
 <component-file-upload></component-file-upload>
@@ -337,7 +338,7 @@ form:{
 		extend2:'扩展表单2',
 	},
 	formLabel:[
-		{prop: 'id', title: '编号', type: 'text',tag:'span',style:{color:'red'},render:(val)=>{return val}},
+		{prop: 'id', title: '编号', type: 'text',tag:'span',style:{color:'red'},render:(val){return val}},
 		{prop: 'name', title: '名称', type: 'input',disabled:false,prefixIcon:'el-icon-user',placeholder:'请输入姓名'},
 		{prop: 'nameLine', title: '同行显示', type: 'input',formItemStyle:{width:'500px'},style:{display:'inline-block',width:'100px',transform:'translateX(27px)'}},
 		{prop: 'number', title: '数字', type: 'inputNumber',change:(val)=>{console.log(val)}},
@@ -606,6 +607,43 @@ export default {
                 'http://p1.meituan.net/wedding/b8a49d1f1b3eb3d4e9eefcddb67bd16b166188.jpg%40watermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20',
                 'http://p1.meituan.net/wedding/b8a49d1f1b3eb3d4e9eefcddb67bd16b166188.jpg%40watermark%3D1%26%26r%3D1%26p%3D9%26x%3D2%26y%3D2%26relative%3D1%26o%3D20',
             ],
+        }
+    }
+}
+```
+#### popover
+```
+<component-popover :width="300"
+       :text="'触发此内容将显示popover'"
+       :size="'按钮样式'"
+       :placement="'right-top'"
+       :tag="'span'"
+       :trigger="'hover'"
+       :tagStyle="{color:'red'}"
+       :params="'额外参数'"
+       @ok="handleOk"
+       @cancel="handleCancel">
+</component-popover>
+
+<hr />
+
+<!-- 扩展内容 -->
+<component-popover :isSlot="true" :tag="'span'" :trigger="'hover'" :tagStyle="{color:'red'}">
+    <template slot="content">
+        <span>aaaaaaaaaaa</span>
+    </template>
+</component-popover>
+
+export default {
+    name:'Popover',
+    methods:{
+        handleCancel:function () {
+            document.body.click();
+            this.$emit('cancel',this.params);
+        },
+        handleOk:function () {
+            document.body.click();
+            this.$emit('ok',this.params);
         }
     }
 }

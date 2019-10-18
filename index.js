@@ -2,6 +2,7 @@ import axios from 'axios'
 import table from './components/table'
 import form from './components/form'
 import dialog from './components/dialog'
+import popover from './components/popover'
 import preview from './components/preview'
 import upload from './components/upload'
 import fileUpload from './components/fileUpload'
@@ -25,6 +26,7 @@ export default {
         Vue.component('ComponentTable',table);
         Vue.component('ComponentDialog',dialog);
         Vue.component('ComponentForm',form);
+        Vue.component('ComponentPopover',popover);
         Vue.component('ComponentPreview',preview);
         Vue.component('ComponentUpload',upload);
         Vue.component('ComponentFileUpload',fileUpload);
