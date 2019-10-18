@@ -637,13 +637,11 @@ export default {
 export default {
     name:'Popover',
     methods:{
-        handleCancel:function () {
-            document.body.click();
-            this.$emit('cancel',this.params);
+        handleCancel:function (params) {
+            console.log('参外参数',params);
         },
         handleOk:function () {
-            document.body.click();
-            this.$emit('ok',this.params);
+            console.log('参外参数',params);
         }
     }
 }
