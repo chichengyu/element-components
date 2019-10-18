@@ -1,6 +1,6 @@
 <template>
     <div class="popover" style="display:inline-block;margin-right:6px;vertical-align:middle;">
-        <el-popover :trigger="trigger" :placement="placement" :width="width" style="margin-left:10px">
+        <el-popover :trigger="trigger" :placement="placement" :width="width">
             <template v-if="isSlot">
                 <slot name="content" />
                 <el-button v-if="tag==='button'" type="danger" :size="size" slot="reference">{{ text }}</el-button>
