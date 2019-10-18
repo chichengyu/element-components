@@ -28,49 +28,15 @@ export default {
     name:'Popover',
     methods:{
         handleCancel:function () {
-            document.body.click();
-            this.$emit('cancel',this.params);
+            console.log('额外参数',params);
         },
         handleOk:function () {
-            document.body.click();
-            this.$emit('ok',this.params);
+            console.log('额外参数',params);
         }
     }
 }
 </script>
 
 <style lang="css" scoped>
-.img{
-    position: relative;
-    border: 1px solid #c0ccda;
-    border-radius: 6px;
-    background: #fff;
-    overflow: hidden;
-}
-.img:hover > span{
-    opacity: 1;
-}
-.img > span{
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    margin: auto;
-    width: 100%;
-    height: 100%;
-    background-color:rgba(0,0,0,.5);
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    transition: opacity .3s;
-}
-.img > span > i{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -8px;
-    margin-top: -8px;
-}
+
 </style>
