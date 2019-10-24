@@ -11,6 +11,12 @@
 #### Getting started
 ```
 npm install element-component -S
+
+import Vue from 'vue'
+import ElementComponent from 'element-component'
+
+Vue.use(ElementComponent);
+
 ```
 
 ## Use
@@ -62,7 +68,7 @@ this.validator.isRegExpUrl(val);
 this.validator.isRegExpInteger(val);
 ```
 #### message
-提供了 message, warning, success, error, confirm 的居中
+提供了 message, warning, success, error, alert, prompt, confirm 的居中
 ```
 # message
 this.message(msg,callback,duration)
