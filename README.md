@@ -11,7 +11,9 @@
 #### Getting started
 ```
 npm install element-component -S
-
+```
+注册组件
+```
 import Vue from 'vue'
 import ElementComponent from 'element-component'
 
