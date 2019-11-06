@@ -238,12 +238,12 @@ util.size = function (data) {
 }
 .table >>> .switchStyle .el-switch__label--left {
     width: 100%;
-    z-index: 9;
+    z-index: 1;
     left: 22px;
 }
 .table >>> .switchStyle .el-switch__label--right {
     width: 100%;
-    z-index: 9;
+    z-index: 1;
     margin-left: 8px;
 }
 .table >>> .switchStyle .el-switch__label.is-active {
