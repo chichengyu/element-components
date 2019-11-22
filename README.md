@@ -176,7 +176,7 @@ tableData: {
 		]
 	},
 	// 分页
-	page:{align:'right',total:1,currentPage:1,currentChange:(currentPage) => {
+	page:{align:'right',total:1,size:10,currentPage:1,currentChange:(currentPage) => {
 		console.log('当前页',currentPage);
 		this.tableData.loading = true;
 		setTimeout(() => {
