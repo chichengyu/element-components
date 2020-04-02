@@ -131,6 +131,7 @@ tableData: {
 	],
 	// 列
 	tableLabel:[
+		{type:'index',fixed:'left'},
 		{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center',style:(params,item)=>{return {color:'red'}}},
 		{prop:'img',title:'缩略图',isPreview:true,width:100,style:(params,col) => {
 			return {height:'50px'}

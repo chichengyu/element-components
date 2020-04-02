@@ -9,82 +9,84 @@
             :data="data.tableData"
             :default-sort="data.defaultSort"
             @sort-change="handleSort">
-            <el-table-column v-for="(col,key) in data.tableLabel"
-                :key="key"
-                :type="col.type"
-                :fixed="col.fixed"
-                :prop="col.prop"
-                :label="col.title"
-                :width="col.width"
-                :min-width="col.minWidth"
-                :sortable="col.sort"
-                :formatter="col.formatter"
-                :align="col.align||'left'">
-                <template slot-scope="scope">
-                    <el-switch class="switchStyle" v-if="col.isSwitch"
-                        :style="col.style&&col.style(scope,col)"
-                        :disabled="col.disabled"
-                        v-model="scope.row[col.prop]"
-                        active-color="#52BEA6"
-                        inactive-color="#ccc"
-                        :active-value="1"
-                        :inactive-value="0"
-                        :active-text="col.activeText||'正常'"
-                        :inactive-text="col.inactiveText||'禁用'"
-                        @change="col.change && col.change(scope)">
-                    </el-switch>
-                    <div v-else-if="data.tree && col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)">
-                        <template v-if="col.render">
-                            <div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.render(scope,col)[1]||{})">
-                                <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                <i class="el-icon-arrow-right" v-else></i>
-                                <span>{{ col.render(scope,col)[0] }}</span>
-                            </div>
-                        </template>
-                        <template v-else>
-                            <div :style="{marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'}">
-                                <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                <i class="el-icon-arrow-right" v-else></i>
-                                <span>{{ scope.row[col.prop] }}</span>
-                            </div>
-                        </template>
-                        <!--<div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.style&&col.style(scope,col)||{})">
-                            <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                            <i class="el-icon-arrow-right" v-else></i>
-                            <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
-                        </div>-->
-                    </div>
-                    <div v-else-if="col.tooltip">
-                        <el-tooltip placement="top">
+            <template v-for="(col,key) in data.tableLabel">
+                <el-table-column v-if="col.type=='index'" :key="key" type="index" :fixed="col.fixed" :prop="col.prop" :label="col.title" :width="col.width" :min-width="col.minWidth" :sortable="col.sort" :formatter="col.formatter" :align="col.align||'left'"></el-table-column>
+                <el-table-column v-else :key="key"
+                     :type="col.type"
+                     :fixed="col.fixed"
+                     :prop="col.prop"
+                     :label="col.title"
+                     :width="col.width"
+                     :min-width="col.minWidth"
+                     :sortable="col.sort"
+                     :formatter="col.formatter"
+                     :align="col.align||'left'">
+                    <template slot-scope="scope">
+                        <el-switch class="switchStyle" v-if="col.isSwitch"
+                           :style="col.style&&col.style(scope,col)"
+                           :disabled="col.disabled"
+                           v-model="scope.row[col.prop]"
+                           active-color="#52BEA6"
+                           inactive-color="#ccc"
+                           :active-value="1"
+                           :inactive-value="0"
+                           :active-text="col.activeText||'正常'"
+                           :inactive-text="col.inactiveText||'禁用'"
+                           @change="col.change && col.change(scope)">
+                        </el-switch>
+                        <div v-else-if="data.tree && col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)">
                             <template v-if="col.render">
-                                <div slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
-                                <div :style="Object.assign({width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'},col.render(scope,col)[1]||{})">{{ col.render(scope,col)[0] }}</div>
+                                <div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.render(scope,col)[1]||{})">
+                                    <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
+                                    <i class="el-icon-arrow-right" v-else></i>
+                                    <span>{{ col.render(scope,col)[0] }}</span>
+                                </div>
                             </template>
                             <template v-else>
-                                <div slot="content">{{ scope.row[col.prop] }}</div>
-                                <div :style="{width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'}">{{ scope.row[col.prop] }}</div>
+                                <div :style="{marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'}">
+                                    <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
+                                    <i class="el-icon-arrow-right" v-else></i>
+                                    <span>{{ scope.row[col.prop] }}</span>
+                                </div>
                             </template>
-                        </el-tooltip>
-                    </div>
-                    <div v-else>
-                        <div v-if="scope.row.xgrade>0&&col.hasChildren">
-                            <div v-if="col.render" :style="Object.assign({marginLeft:(scope.row.xgrade+0.6)+'em'},col.render(scope)[1]||{})">{{ col.render(scope)[0] }}</div>
-                            <div v-else :style="{marginLeft:(scope.row.xgrade+0.6)+'em'}">{{ scope.row[col.prop] }}</div>
+                            <!--<div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.style&&col.style(scope,col)||{})">
+                                <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
+                                <i class="el-icon-arrow-right" v-else></i>
+                                <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
+                            </div>-->
                         </div>
-                        <div v-else-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
-                            <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
+                        <div v-else-if="col.tooltip">
+                            <el-tooltip placement="top">
+                                <template v-if="col.render">
+                                    <div slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
+                                    <div :style="Object.assign({width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'},col.render(scope,col)[1]||{})">{{ col.render(scope,col)[0] }}</div>
+                                </template>
+                                <template v-else>
+                                    <div slot="content">{{ scope.row[col.prop] }}</div>
+                                    <div :style="{width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'}">{{ scope.row[col.prop] }}</div>
+                                </template>
+                            </el-tooltip>
                         </div>
-                        <div v-else-if="col.slot">
-                            <slot :name="col.slot" v-bind:scope="scope"></slot>
+                        <div v-else>
+                            <div v-if="scope.row.xgrade>0&&col.hasChildren">
+                                <div v-if="col.render" :style="Object.assign({marginLeft:(scope.row.xgrade+0.6)+'em'},col.render(scope)[1]||{})">{{ col.render(scope)[0] }}</div>
+                                <div v-else :style="{marginLeft:(scope.row.xgrade+0.6)+'em'}">{{ scope.row[col.prop] }}</div>
+                            </div>
+                            <div v-else-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
+                                <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
+                            </div>
+                            <div v-else-if="col.slot">
+                                <slot :name="col.slot" v-bind:scope="scope"></slot>
+                            </div>
+                            <div v-else-if="col.render">
+                                <div v-if="col.render(scope,col).length==2" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
+                                <div v-else>{{ col.render(scope,col)[0] }}</div>
+                            </div>
+                            <div v-else :style="col.style&&col.style(scope,col)">{{ scope.row[col.prop] }}</div>
                         </div>
-                        <div v-else-if="col.render">
-                            <div v-if="col.render(scope,col).length==2" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
-                            <div v-else>{{ col.render(scope,col)[0] }}</div>
-                        </div>
-                        <div v-else :style="col.style&&col.style(scope,col)">{{ scope.row[col.prop] }}</div>
-                    </div>
-                </template>
-            </el-table-column>
+                    </template>
+                </el-table-column>
+            </template>
             <el-table-column v-if="data.tableOption"
                 fixed="right"
                 :label="data.tableOption.label"
