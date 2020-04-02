@@ -384,6 +384,7 @@ export default {
         },
       },
       tableDataTree: {
+      	tree:tree,// true 为树形表格
         loading:false,
         // 请求回来的数据
         tableData:[{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,image:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},

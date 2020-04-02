@@ -191,9 +191,18 @@ tableData: {
 }
 ```
 #### treetable
-树形表格比表格 table 多了一个列属性 ``` hasChildren:true ```
+树形表格比表格 table 多了一个属性``` tree:true ```与列属性 ``` hasChildren:true ```
 ```
+# field
 {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
+
+
+# 数据结构
+tableData: {
+	tree:true,// true 为树形表格
+
+	// ......
+}
 ```
 数据结构多了一个children,
 ```

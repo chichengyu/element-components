@@ -33,7 +33,7 @@
                         :inactive-text="col.inactiveText||'禁用'"
                         @change="col.change && col.change(scope)">
                     </el-switch>
-                    <div v-else-if="col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)">
+                    <div v-else-if="data.tree && col.hasChildren && scope.row.children && scope.row.children.length > 0" @click="treeClick(scope.row,scope.$index)">
                         <template v-if="col.render">
                             <div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.render(scope,col)[1]||{})">
                                 <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
@@ -117,7 +117,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination v-if="data.page" :align="data.page.align" :total="data.page.total" :page-size="data.page.size" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
+        <el-pagination v-if="data.page" :align="data.page.align" :total="data.page.total" :current-page="data.page.currentPage" @current-change="data.page.currentChange" background layout="prev, pager, next"></el-pagination>
         <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false"><img :src="previewUrl" width="100%" height="100%" alt=""></el-dialog>
     </div>
 </template>
@@ -129,7 +129,7 @@ export default {
         data:{
             type:Object,
             required:true
-        },
+        }
     },
     data:function(){return {count:0,visibled:false,previewUrl:''}},
     watch:{
@@ -140,8 +140,11 @@ export default {
         }
     },
     created:function(){
-        util.treeTableXcode(this.data.tableData);
-        this.count = 1;
+        if (this.data.tree){
+            util.treeTableXcode(this.data.tableData);
+            this.count = 1;
+        }
+        //!this.tree && util.treeTableXcode(this.data.tableData);
     },
     methods: {
         handleOk:function(currentBtn,scope){

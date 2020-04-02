@@ -26,6 +26,7 @@ export default {
         return {
             visible:false,
             tableData: {
+                tree:true,// true 为树形表格
                 loading:false,
                 // 请求回来的数据
                 tableData:[],
