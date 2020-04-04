@@ -343,7 +343,8 @@ form:{
 		number:1,
 		password: '',
 		text: '',
-		select: '',
+		select: 2,
+		selectParent: 1,
 		selectGroup:2,
 		cascader:'xiaolv',
 		radio: '1',
@@ -365,7 +366,8 @@ form:{
 		{prop: 'password', title: '方式一扩展1', type: 'slot',slot:'formItem1'},
 		{prop: 'password', title: '方式一扩展2', type: 'slot',slot:'formItem2'},
 		{prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
-		{prop: 'select', title: '下拉选择',type: 'select',key:'label',value:'value',options:[
+		// *** 注意： parent 是为了让选择父级的时候，不能选择自己为父级，如果不需要，可以直接去掉 parent 属性
+      	{prop: 'select', title: '下拉选择',type: 'select',parent:'selectParent',key:'label',value:'value',options:[
 			{label:'北京',value:1,level:0},
 			{label:'上海',value:2,level: 1},
 			{label:'重庆',value:3}],
