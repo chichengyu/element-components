@@ -12,7 +12,7 @@
                 <el-input v-if="item.type==='textarea'" type="textarea" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :rows="item.rows || 2" :disabled="item.disabled" :resize="item.resize||'none'" :style="item.style||''" :placeholder="item.placeholder||'请输入内容'"></el-input>
                 <el-select v-if="item.type==='select'" v-model="data.formFields[item.prop]" @change="item.change&&item.change(data.formFields[item.prop])" :size="item.size" :disabled="item.disabled" :style="item.style||''" placeholder="请选择">
                     <el-option label="请选择" value="0"></el-option>
-                    <el-option v-for="(subItem,key) in item.options" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']" :disabled="data.formFields[item.value||'value']!=subItem[item.value||'value']?false:true">
+                    <el-option v-for="(subItem,key) in item.options" :key="key" :label="subItem[item.key||'label']" :value="subItem[item.value||'value']" :disabled="data.formFields[item.prop||'value']!=subItem[item.value||'value']?false:true">
                         <span style="float: left">{{'|-----'.repeat(subItem.level||0) + ' ' + subItem[item.key||'label']}}</span>
                     </el-option>
                 </el-select>
