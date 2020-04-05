@@ -351,6 +351,7 @@ export default {
             {title:'查看',click:(params,currentBtn) => {
                 console.log(params);
                 console.log(currentBtn);
+                console.log('当前表格对象',params._self);
               },render:(params,item)=>{
                 console.log(params);
                 console.log(item);
@@ -360,15 +361,18 @@ export default {
             {title:'编辑',directives:[{name:'has',value:'edit'}],type:'primary',click:(params,currentBtn) => {
                 console.log(params);
                 console.log(currentBtn);
+                console.log('当前表格对象',params._self);
               }},
             {title:'删除',header:'确定要删除吗？',tooltip:true,directives:[{name:'has',value:'del'}],type:'danger',click:{
                 ok:(params,currentBtn) => {
                   console.log('确认删除',params);
                   console.log(currentBtn);
+                  console.log('当前表格对象',params._self);
                 },
                 cancel:(params,currentBtn) => {
                   console.log('取消删除',params);
                   console.log(currentBtn);
+                  console.log('当前表格对象',params._self);
                 }
               }},
           ]
@@ -382,9 +386,15 @@ export default {
             },1500)
           }},
         // 排序
-        sortChange(obj) {
+        sortChange(obj,tableObject) {
           console.log(10);
           console.log(obj);
+          console.log('当前表格对象',tableObject);
+        },
+        // 表格实现多选时的 change 事件
+        selectionChange(params,tableObject){
+          console.log('选择项改变时的值',params);
+          console.log('表格对象',tableObject);
         },
       },
       tableDataTree: {
@@ -524,8 +534,14 @@ export default {
             },1500)
           }},
         // 排序
-        sortChange(obj) {
+        sortChange(obj,tableObject) {
           console.log(obj);
+          console.log('当前表格对象',tableObject);
+        },
+        // 表格实现多选时的 change 事件
+        selectionChange(params,tableObject){
+          console.log('选择项改变时的值',params);
+          console.log('表格对象',tableObject);
         },
       },
       //  上传

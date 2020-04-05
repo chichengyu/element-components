@@ -1,6 +1,6 @@
 <template>
     <div class="table" style="width:100%;margin-top:5px">
-        <el-table style="width:100%"
+        <el-table ref="table" style="width:100%"
             border
             v-loading="data.loading"
             :element-loading-text="data.loadingText||'Loading'"
@@ -8,9 +8,11 @@
             :empty-text="data.table_msg_empty"
             :data="data.tableData"
             :default-sort="data.defaultSort"
+            @selection-change="handleSelectionChange"
             @sort-change="handleSort">
             <template v-for="(col,key) in data.tableLabel">
-                <el-table-column v-if="col.type=='index'" :key="key" type="index" :fixed="col.fixed" :prop="col.prop" :label="col.title" :width="col.width" :min-width="col.minWidth" :sortable="col.sort" :formatter="col.formatter" :align="col.align||'left'"></el-table-column>
+                <el-table-column v-if="col.type=='selection'" :key="key" type="selection" :fixed="col.fixed" :prop="col.prop" :label="col.title" :width="col.width" :min-width="col.minWidth" :sortable="col.sort" :formatter="col.formatter" :align="col.align||'left'"></el-table-column>
+                <el-table-column v-else-if="col.type=='index'" :key="key" type="index" :fixed="col.fixed" :prop="col.prop" :label="col.title" :width="col.width" :min-width="col.minWidth" :sortable="col.sort" :formatter="col.formatter" :align="col.align||'left'"></el-table-column>
                 <el-table-column v-else :key="key"
                      :type="col.type"
                      :fixed="col.fixed"
@@ -190,7 +192,8 @@ export default {
             item.open = false;
             this.data.tableData.splice(Number(index)+1,util.size(item.children));
         },
-        handleSort:function(params){this.data.sortChange && this.data.sortChange(params);},
+        handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
+        handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
         handlePreview:function(src){
             this.previewUrl = src;
             this.visibled = true;

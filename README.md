@@ -155,6 +155,7 @@ tableData: {
 			{title:'查看',click:(params,currentBtn) => {
 				console.log(params);
 				console.log(currentBtn);
+				console.log('当前表格对象',params._self);
 			},render:(params,item)=>{
 					console.log(params);
 					return 123;
@@ -163,15 +164,18 @@ tableData: {
 			{title:'编辑',type:'primary',click:(params,currentBtn) => {
 				console.log(params);
 				console.log(currentBtn);
+				console.log('当前表格对象',params._self);
 			}},
 			{title:'删除',header:'确定要删除吗？',tooltip:true,type:'danger',click:{
 				ok:(params,currentBtn) => {
 					console.log('确认删除',params);
 					console.log(currentBtn);
+					console.log('当前表格对象',params._self);
 				},
 				cancel:(params,currentBtn) => {
 					console.log('取消删除',params);
 					console.log(currentBtn);
+					console.log('当前表格对象',params._self);
 				}
 			}},
 		]
@@ -185,10 +189,16 @@ tableData: {
 		},1500)
 	}},
 	// 排序
-	sortChange(obj) {
+	sortChange(obj,tableObject) {
 		console.log(10);
 		console.log(obj);
+		console.log('当前表格对象',tableObject);
 	},
+	// 表格实现多选时的 change 事件
+    selectionChange(params,tableObject){
+        console.log('选择项改变时的值',params);
+        console.log('表格对象',tableObject);
+    },
 }
 ```
 #### treetable
