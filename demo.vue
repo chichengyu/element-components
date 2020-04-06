@@ -341,7 +341,7 @@ export default {
           {prop:'city',title:'城市'},
           {prop:'address',title:'地址',tooltip:true,width:150},
           {prop:'zip',title:'邮编',sort:'custom'},
-          {prop:'status',title:'状态',isSwitch:true,style:(params,item)=>{return {display:'none'}},activeText:'正常',inactiveText:'禁用',change:(currentData) => {console.log('switch开关',currentData)}}
+          {prop:'status',title:'状态',isSwitch:true,style:(params,item)=>{return {display:'none'}},activeText:'正常',inactiveText:'禁用',activeValue:1,inactiveValue:2,change:(currentData) => {console.log('switch开关',currentData)}}
         ],
         // 操作
         tableOption:{
@@ -499,7 +499,7 @@ export default {
           {prop:'city',title:'城市',slot:'col'},
           {prop:'address',title:'地址',tooltip:true},
           {prop:'zip',title:'邮编',sort:'custom'},
-          {prop:'status',title:'状态',isSwitch:true,activeText:'正常',inactiveText:'禁用',change:(currentData) => {console.log('switch开关',currentData)}}
+          {prop:'status',title:'状态',isSwitch:true,activeText:'正常',inactiveText:'禁用',activeValue:1,inactiveValue:2,change:(currentData) => {console.log('switch开关',currentData)}}
         ],
         // 操作
         tableOption:{

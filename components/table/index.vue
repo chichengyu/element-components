@@ -30,8 +30,8 @@
                            v-model="scope.row[col.prop]"
                            active-color="#52BEA6"
                            inactive-color="#ccc"
-                           :active-value="1"
-                           :inactive-value="0"
+                           :active-value="col.activeValue||1"
+                           :inactive-value="col.inactiveValue||0"
                            :active-text="col.activeText||'正常'"
                            :inactive-text="col.inactiveText||'禁用'"
                            @change="col.change && col.change(scope)">
