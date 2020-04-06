@@ -9,7 +9,7 @@
             </template>
             <template v-else>
                 <div style="text-align:center;margin:0">
-                    <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>'你确定删除吗？</h4>
+                    <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>你确定删除吗？</h4>
                     <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel">取消</el-button>
                     <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk">确定</el-button>
                 </div>
