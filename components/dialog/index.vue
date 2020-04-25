@@ -2,7 +2,7 @@
     <el-dialog
         :title="title"
         :visible.sync="$attrs.visible"
-        :width="width+'%'"
+        :width="'number'==typeof width?width+'%':width"
         :close-on-click-modal="close"
         :append-to-body="appendToBody"
         :before-close="handleClose"
@@ -23,7 +23,7 @@ export default {
             required: true
         },
         width:{
-            type:Number,
+            type:[Number,String],
             default:30
         },
         footer:{

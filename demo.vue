@@ -4,10 +4,11 @@
     <h1>Dialog弹窗</h1>
     <div class="dialog">
       <el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
-      <!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true-->
+      <!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true
+      width：可以为 number 50,20..., string '500px' -->
       <component-dialog
               :title="'Dialog弹窗'"
-              :width="50"
+              :width="50" 
               :visible.sync="dialogVisible"
               :appendToBody='false'
               @handleCancel="handleCancel"
