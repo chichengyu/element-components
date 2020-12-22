@@ -153,7 +153,7 @@ tableData: {
 		width:230,
 		slot:true,// 按钮操作扩展，不扩展时去掉或改为false
 		buttons:[
-			{title:'查看',click:(params,currentBtn) => {
+			{title:'查看',plain:true,click:(params,currentBtn) => {
 				console.log(params);
 				console.log(currentBtn);
 				console.log('当前表格对象',params._self);
@@ -162,12 +162,12 @@ tableData: {
 					return 123;
 				}
 			},
-			{title:'编辑',type:'primary',click:(params,currentBtn) => {
+			{title:'编辑',type:'primary',plain:true,icon:'el-icon-edit',click:(params,currentBtn) => {
 				console.log(params);
 				console.log(currentBtn);
 				console.log('当前表格对象',params._self);
 			}},
-			{title:'删除',header:'确定要删除吗？',tooltip:true,type:'danger',click:{
+			{title:'删除',type:'danger',plain:true,icon:'el-icon-delete',header:'确定要删除吗？',tooltip:true,click:{
 				ok:(params,currentBtn) => {
 					console.log('确认删除',params);
 					console.log(currentBtn);
@@ -562,6 +562,21 @@ export default {
 		@remove="handleRemove">
 	</component-upload>
 
+	<!-- 所有属性 -->
+	<component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}" :appendToBody="false" 
+		:name='"file"'
+		:listType='picture-card'
+		:headers='headers'
+		:disabled='false'
+		:multiple='false'
+		:accept='".jpg,.jpeg,.png"'
+		:data='data'
+		:autoUpload='true'
+		:httpRequest="httpRequest"
+		@before="handleBefore"
+		@success="handleSuccess"
+		@remove="handleRemove">
+	</component-upload>
 	<hr>
 
 	<!-- 多张 -->
@@ -589,7 +604,9 @@ export default {
             ],
             action:'',
             actionFile:'',
-            actionFileUploadUrl:''
+            actionFileUploadUrl:'',
+            headers:{token:'adscasfdsfs'},
+            data:{}
         }
     },
     methods:{
@@ -614,6 +631,10 @@ export default {
         },
         handleExcelError(response, file, fileList,params){
             tconsole.log(params);
+        },
+        // 自定义上传
+        httpRequest(file){
+            console.log(2000,file);
         },
     }
 }
@@ -654,6 +675,8 @@ export default {
        :trigger="'hover'"
        :tagStyle="{color:'red'}"
        :params="'额外参数'"
+       :type="'primary'"
+       :plain="true"
        @ok="handleOk"
        @cancel="handleCancel">
 </component-popover>

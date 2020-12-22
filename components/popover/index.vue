@@ -3,7 +3,7 @@
         <el-popover :trigger="trigger" :placement="placement" :width="width">
             <template v-if="isSlot">
                 <slot name="content" />
-                <el-button v-if="tag==='button'" type="danger" :size="size" slot="reference">{{ text }}</el-button>
+                <el-button v-if="tag==='button'" :type="type" :plain="plain" :size="size" slot="reference">{{ text }}</el-button>
                 <span v-if="tag==='span'" slot="reference" :style="tagStyle">{{ text }}</span>
                 <div v-if="tag==='div'" slot="reference" :style="tagStyle">{{ text }}</div>
             </template>
@@ -13,7 +13,7 @@
                     <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel">取消</el-button>
                     <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk">确定</el-button>
                 </div>
-                <el-button v-if="tag==='button'" type="danger" :size="size" slot="reference">{{ text }}</el-button>
+                <el-button v-if="tag==='button'" :type="type" :plain="plain" :size="size" slot="reference">{{ text }}</el-button>
                 <span v-if="tag==='span'" slot="reference" :style="tagStyle">{{ text }}</span>
                 <div v-if="tag==='div'" slot="reference" :style="tagStyle">{{ text }}</div>
             </template>
@@ -26,6 +26,14 @@ export default {
     name:'Popover',
     props:{
         isSlot:{
+            type:Boolean,
+            default:false
+        },
+        type:{
+            type:String,
+            default:'danger'
+        },
+        plain:{
             type:Boolean,
             default:false
         },
