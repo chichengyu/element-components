@@ -123,9 +123,9 @@ tableData: {
 	loading:false,
 	border:true,// 是否边框
 	size:'small',// table表格模式
-    stripe:true,// 是否为斑马纹 table
-    maxHeight:300,// table最大高度
-    showHeader:true,// 是否固定显示表头
+	stripe:true,// 是否为斑马纹 table
+	maxHeight:300,// table最大高度
+	showHeader:true,// 是否固定显示表头
 	// 请求回来的数据
 	tableData:[
 		{id:1, date: '2016-05-02', name: '王小虎', province: '上海', city: '普陀区', address: '上海市普陀区金沙江路 1518 弄', zip: 200333, status:0,img:'http://img1.2345.com/duoteimg/qqTxImg/2/5804bb86e3d62336.jpg%21200x200.jpg'},
