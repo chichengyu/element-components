@@ -1,7 +1,7 @@
 <template>
     <div class="table" style="width:100%;margin-top:5px">
         <el-table ref="table" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
-            :border="data.border||true"
+            :border="data.border"
             v-loading="data.loading"
             :element-loading-text="data.loadingText||'Loading'"
             :element-loading-spinner="data.loadingIcon||'el-icon-loading'"
