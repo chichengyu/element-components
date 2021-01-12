@@ -593,7 +593,22 @@ export default {
 
 	<!-- 文件上传 -->
 	<component-file-upload :action="actionFileUploadUrl" :size="'default'" :title="'导入'" @before="handleExcelBefore" @success="handleExcelbSuccess" @error="handleExcelError" :params="{name:'小二'}"></component-file-upload>
+	<component-file-upload :action="'#'" :httpRequest="httpRequest"></component-file-upload>
 
+	<!-- 所有属性 -->
+	<component-file-upload :action="'#'" :title="导入" :size="'default'" :params="{name:'小二'}"
+		:name='"file"'
+		:headers='headers'
+		:disabled='false'
+		:accept='".xlsx"'
+		:data='data'
+		:autoUpload='true'
+		:showFileList='true'
+		:httpRequest="httpRequest"
+		@before="handleBefore"
+		@success="handleSuccess"
+		@remove="handleRemove">
+	</component-file-upload>
 </div>
 export default {
     name: "Upload",
@@ -639,7 +654,8 @@ export default {
         },
         // 自定义上传
         httpRequest(file){
-            console.log(2000,file);
+            // :autoUpload="true" 属性必须设置为true,可以不设置默认为true
+            console.log('文件对象',file);
         },
     }
 }

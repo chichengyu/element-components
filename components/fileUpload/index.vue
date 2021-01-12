@@ -9,6 +9,7 @@
             :headers="headers"
             :file-list="fileImageList"
             :data="data"
+            :http-request="httpRequest"
             :before-upload="handleBefore"
             :on-success="handleSuccess"
             :on-error="handleError">
@@ -40,6 +41,10 @@ export default {
         data:{
             type:Object,
             default:function () {return {};}
+        },
+        httpRequest:{
+            type:Function,
+            default:function () {return function(){};}
         },
         autoUpload:{
             type:Boolean,
