@@ -1,6 +1,6 @@
 <template>
     <div class="upload">
-        <el-upload :name="name" class="avatar-uploader"
+        <el-upload ref="upload" :name="name" class="avatar-uploader"
             :action="action"
             :disabled="disabled"
             :list-type="listType"
@@ -21,7 +21,7 @@
                     <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
                         <i class="el-icon-zoom-in"></i>
                     </span>
-                    <span class="el-upload-list__item-delete" style="margin-left: 6px" @click="handleRemove(file)">
+                    <span v-if="!disabled" class="el-upload-list__item-delete" style="margin-left:6px" @click="handleRemove(file,$event)">
                         <i class="el-icon-delete"></i>
                     </span>
                 </span>
@@ -42,6 +42,10 @@ export default {
             default:'file',
         },
         disabled:{
+            type:Boolean,
+            default: false
+        },
+        more:{
             type:Boolean,
             default: false
         },
@@ -111,22 +115,27 @@ export default {
         },
     },
     methods: {
-        handleRemove:function(file) {
-            this.$emit('remove',file,this.fileImageList,this.params);
+        handleRemove:function(file,e) {
+            let target = e.currentTarget.parentNode.parentNode.parentNode,index = null;
+            target.parentNode.children && (index = Array.prototype.indexOf.call(target.parentNode.children,target));
+            target.parentNode.removeChild(target);
+            this.$emit('remove',file,this.$refs.upload,this.fileImageList,this.params,index);
         },
         handlePictureCardPreview:function(file) {
             this.dialogImageUrl = file.url;
             this.visible = true;
         },
         handleBefore:function(file){
-            return this.$emit('before',file,this.params);
+            let parent = this.$refs.upload.$children[0].$el;
+            !this.more && parent.childElementCount>0 && parent.removeChild(parent.children[0]);
+            return this.$emit('before',file,this.$refs.upload,this.params);
         },
         handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList,this.params);
+            this.$emit('success',response,file,this.$refs.upload,fileList,this.params);
         },
         handleError:function(err, file, fileList){
-            this.$emit('error',err, file, fileList,this.params);
+            this.$emit('error',err, file,this.$refs.upload, fileList,this.params);
         }
     }
 }

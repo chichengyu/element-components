@@ -570,6 +570,7 @@ export default {
 	<!-- 所有属性 -->
 	<component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}" :appendToBody="false" 
 		:name='"file"'
+		:more="true"
 		:listType='picture-card'
 		:headers='headers'
 		:disabled='false'
@@ -580,7 +581,8 @@ export default {
 		:httpRequest="httpRequest"
 		@before="handleBefore"
 		@success="handleSuccess"
-		@remove="handleRemove">
+		@remove="handleRemove"
+		@error="handleError">
 	</component-upload>
 	<hr>
 
@@ -598,6 +600,7 @@ export default {
 	<!-- 所有属性 -->
 	<component-file-upload :action="'#'" :title="导入" :size="'default'" :params="{name:'小二'}"
 		:name='"file"'
+		:more="true"
 		:headers='headers'
 		:disabled='false'
 		:accept='".xlsx"'
@@ -607,7 +610,8 @@ export default {
 		:httpRequest="httpRequest"
 		@before="handleBefore"
 		@success="handleSuccess"
-		@remove="handleRemove">
+		@remove="handleRemove"
+		@error="handleError">
 	</component-file-upload>
 </div>
 export default {
@@ -630,18 +634,29 @@ export default {
         }
     },
     methods:{
-        handleBefore(file,params){
+        handleBefore(file,uploadDom,params){
             console.log(file);
+            console.log(uploadDom);
+            console.log(params);
         },
-        handleSuccess(response, file, fileList,params){
+        handleSuccess(response, file,uploadDom, fileList,params){
             console.log(response);
+            console.log(file);
+            console.log(uploadDom);
         },
-        handleRemove(file,fileImageList,params){
+        handleError(error, file,uploadDom, fileList,params){
+            console.log(response);
+            console.log(file);
+            console.log(uploadDom);
+        },
+        handleRemove(file,uploadDom,fileImageList,params,index){
             console.log('删除图片',file);
+            console.log(uploadDom);
             console.log(fileImageList);
             console.log(params);
+            console.log(index);
             // fileImageList 已显示的图片列表数组，可以执行如代码进行删除显示图片，fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
-			fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
+            // fileImageList.length>0 && fileImageList.includes(file) && fileImageList.splice(fileImageList.indexOf(file),1);
         },
         handleExcelBefore(file,params){
             console.log(params);
@@ -656,7 +671,7 @@ export default {
         httpRequest(file){
             // :autoUpload="true" 属性必须设置为true,可以不设置默认为true
             console.log('文件对象',file);
-        },
+        }
     }
 }
 ```
