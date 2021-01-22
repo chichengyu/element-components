@@ -21,7 +21,7 @@
                     <span class="el-upload-list__item-preview" @click="handlePictureCardPreview(file)">
                         <i class="el-icon-zoom-in"></i>
                     </span>
-                    <span v-if="!disabled" class="el-upload-list__item-delete" style="margin-left:6px" @click="handleRemove(file,$event)">
+                    <span v-if="del" class="el-upload-list__item-delete" style="margin-left:6px" @click="handleRemove(file,$event)">
                         <i class="el-icon-delete"></i>
                     </span>
                 </span>
@@ -48,6 +48,10 @@ export default {
         more:{
             type:Boolean,
             default: false
+        },
+        del:{
+            type:Boolean,
+            default: true
         },
         action:{
             type:String,

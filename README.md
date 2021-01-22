@@ -4,7 +4,7 @@
 
 基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用,
 
-*注：本人这里使用的是 element-ui@2.11.1，vue@2.6。
+*注：本人这里使用的是 element-ui@2.11.1 / element-ui@2.13.0，vue@2.6。
 
 
 
@@ -571,6 +571,7 @@ export default {
 	<component-upload :action="'#'" :previewImages="url" :params="{name:'小二'}" :appendToBody="false" 
 		:name='"file"'
 		:more="true"
+		:del="true"
 		:listType='picture-card'
 		:headers='headers'
 		:disabled='false'
@@ -749,7 +750,19 @@ export default {
 	
 	<hr/>
 	
-	<component-wang-editor style="width: 600px;" :height="350" @fail="handleFail" @fail="handleFail" @success="handleSuccess" @timeout="handleTimeout" @error="handleError" @change="handleChange"></component-wang-editor>
+	<!-- 所有属性 -->
+	<component-wang-editor style="width: 600px;" 
+       :height="350"
+       :disabled='false'
+       :isClear="false"
+       :headers='{}'
+       :debug='false'
+       @fail="handleFail" 
+       @success="handleSuccess" 
+       @timeout="handleTimeout" 
+       @error="handleError" 
+       @change="handleChange">
+	</component-wang-editor>
 
 </div>
 

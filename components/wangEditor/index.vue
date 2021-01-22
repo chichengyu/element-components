@@ -35,7 +35,7 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		isdisable:{
+        disabled:{
 			type: Boolean,
 			default: true
 		},
@@ -59,7 +59,12 @@ export default {
 			if (value !== this.editor.txt.html()) {
 				this.editor.txt.html(this.value)
 			}
-		}
+		},
+        disabled: {
+            immediate:true,
+            deep:true,
+            handler(val){this.editor && this.editor.$textElem.attr('contenteditable', !val);}
+        }
 	},
 	mounted:function() {
 		this.setEditor();
@@ -137,7 +142,7 @@ export default {
 				this.editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1');
 			}
 			this.editor.create();
-			this.editor.$textElem.attr('contenteditable', this.isdisable);
+			this.editor.$textElem.attr('contenteditable', !this.disabled);
 		}
 	}
 }
