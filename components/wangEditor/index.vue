@@ -1,10 +1,5 @@
 <template>
-    <div class="editor" style="background-color:#fff;">
-        <div ref="toolbar" class="toolbar">
-        </div>
-        <div ref="editor" class="text" :style="{height:height+'px'}">
-        </div>
-    </div>
+    <div ref="editor" class="text" :style="{height:height+'px'}"></div>
 </template>
 
 <script>
@@ -15,14 +10,9 @@ export default {
 	data:function() {
 		return {
 			editor:null,
-			content:''
 		}
 	},
 	props:{
-		uploadUrl:{
-			type:String,
-			default: ''
-		},
 		value: {
 			type: String,
 			default: ''
@@ -35,13 +25,97 @@ export default {
 			type: Boolean,
 			default: false
 		},
-        disabled:{
+		disabled:{
 			type: Boolean,
 			default: false
 		},
-        headers:{
+        customUploadImg:{
+            type:Function,
+            defailt:function () { return function () {};}
+        },
+        showLinkImg:{
+            type:Boolean,
+            default: true
+        },
+        uploadFileName:{
+            type:String,
+            default: 'file'
+        },
+        uploadImgServer:{
+            type:String,
+            default: ''
+        },
+        uploadImgMaxSize:{
+            type:Number,
+            default:2 * 1024 * 1024
+        },
+        uploadImgAccept:{
+            type:Array,
+            default:function () {return ['jpg', 'jpeg', 'png', 'gif', 'bmp'];}
+        },
+        uploadImgMaxLength:{
+            type:Number,
+            default:5
+        },
+        uploadImgParams:{
+            type:Object,
+            defailt:function () {return {};}
+        },
+        uploadImgParamsWithUrl:{
+            type:Boolean,
+            default: false
+        },
+        uploadImgHeaders:{
 		  type:Object,
           defailt:function () {return {};}
+        },
+        uploadImgTimeout:{
+		    type:Number,
+            default:5 * 1000
+        },
+        customUploadVideo:{
+            type:Function,
+            defailt:function () { return function () {};}
+        },
+        customInsertVideo:{
+            type:Function,
+            defailt:function () { return function () {};}
+        },
+        showLinkVideo:{
+            type: Boolean,
+            default: true
+        },
+        uploadVideoServer:{
+            type:String,
+            default: ''
+        },
+        uploadVideoName:{
+            type:String,
+            default: 'file'
+        },
+        uploadVideoHeaders:{
+            type:Object,
+            default: function () {return {};}
+        },
+        uploadVideoParams:{
+		  type:Object,
+          defailt:function () {return {};}
+        },
+        uploadVideoParamsWithUrl:{
+            type: Boolean,
+            default: false
+        },
+        uploadVideoSize:{
+            type:Number,
+            default:1 * 1024 * 1024 * 1024
+        },
+        uploadVideoTimeout:{
+            type:Number,
+            default:1000 * 60 * 5
+        },
+        uploadVideoAccept:{
+            type:Array,
+            default:function () {return ['mp4'];}
         },
 		debug:{
 			type:Boolean,
@@ -52,7 +126,6 @@ export default {
 		isClear:function(val) {
 			if (val) {
 				this.editor.txt.clear();
-				this.content = null;
 			}
 		},
 		value: function(value) {
@@ -72,94 +145,132 @@ export default {
 	},
 	methods:{
 		setEditor:function() {
-			this.editor = new E(this.$refs.toolbar, this.$refs.editor);
-			this.editor.customConfig.zIndex = 0;
-			this.editor.customConfig.uploadFileName = 'file';
-			this.editor.customConfig.onchangeTimeout = 1;
-			this.editor.customConfig.uploadImgMaxLength = 5;
-			this.editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024;
-			this.editor.customConfig.uploadImgTimeout = 3 * 60 * 1000;
-			this.editor.customConfig.uploadImgHeaders  = this.headers;
-			this.editor.customConfig.menus = [
-				'head',
-				'bold',
-				'fontSize',
-				'fontName',
-				'italic',
-				'underline',
-				'strikeThrough',
-				'foreColor',
-				'backColor',
-				'link',
-				'list',
-				'justify',
-				'quote',
-				'emoticon',
-				'image',
-				'table',
-				'video',
-				'code',
-				'undo',
-				'redo',
-				'fullscreen'
+			//this.editor = new E(this.$refs.toolbar, this.$refs.editor);
+            this.editor = new E(this.$refs.editor);
+			this.editor.config.zIndex = 0;
+			this.editor.config.menus = [
+                'head',
+                'bold',
+                'fontSize',
+                'fontName',
+                'italic',
+                'underline',
+                'strikeThrough',
+                'indent',
+                'lineHeight',
+                'foreColor',
+                'backColor',
+                'link',
+                'list',
+                'todo',
+                'justify',
+                'quote',
+                'emoticon',
+                'image',
+                'video',
+                'table',
+                'code',
+                'splitLine',
+                'undo',
+                'redo',
 			];
-
-			if (this.uploadUrl !== '') {
-				this.editor.customConfig.uploadImgServer = this.uploadUrl;
+            this.editor.config.uploadFileName = this.uploadFileName;
+            this.editor.config.onchangeTimeout = 1;
+            this.editor.config.withCredentials = true;
+            this.editor.config.showLinkImg = this.showLinkImg;
+            this.editor.config.uploadImgMaxLength = this.uploadImgMaxLength;
+            this.editor.config.uploadImgMaxSize = this.uploadImgMaxSize;
+            this.editor.config.uploadImgAccept = this.uploadImgAccept;
+            this.editor.config.uploadImgParams = this.uploadImgParams;
+            this.editor.config.uploadImgTimeout = this.uploadImgTimeout;
+            this.editor.config.uploadImgHeaders = this.uploadImgHeaders;
+            this.editor.config.uploadImgParamsWithUrl = this.uploadImgParamsWithUrl;
+			if (this.uploadImgServer !== '') {
+                this.editor.config.uploadImgServer = this.uploadImgServer;
 			}else {
-				this.editor.customConfig.uploadImgShowBase64 = true;
+                this.editor.config.uploadImgShowBase64 = true;
 			}
             var _this = this;
-			this.editor.customConfig.uploadImgHooks = {
+			this.editor.config.uploadImgHooks = {
+                before: function(xhr){
+                    return _this.$emit('before', xhr,{prevent:true,msg:'需要提示给用户的错误信息'},_this.editor,_this.$refs.editor);
+                },
 				fail: function(xhr, editor, result){
-                    _this.$emit('fail', xhr, editor, result);
+                    _this.$emit('fail', xhr, editor, result,_this.editor,_this.$refs.editor);
 				},
-				success: function(xhr, editor, result){
-                    _this.$emit('success', xhr, editor, result);
+				success: function(xhr){
+                    _this.$emit('success', xhr,_this.editor,_this.$refs.editor);
 				},
-				timeout: function(xhr, editor){
-                    _this.$emit('timeout', xhr, editor);
+				timeout: function(xhr){
+                    _this.$emit('timeout', xhr,_this.editor,_this.$refs.editor);
 				},
-				error: function(xhr, editor){
-                    _this.$emit('error', xhr, editor);
+				error: function(xhr, editor,result){
+                    _this.$emit('error', xhr, editor,result,_this.editor,_this.$refs.editor);
 				},
-				customInsert: function(insertImg, result, editor){
-					if (result.data && result.data.length) {
-						for (var i = 0; i < result.data.length; i++) {
-							var url = result.data[i].ivew_path;
-							insertImg(url);
-						}
-					}else {
-						insertImg(result.ivew_path);
-					}
-				}
+                customInsert: function(insertImg, result){
+                    _this.$emit('customInsert', insertImg, result,_this.editor,_this.$refs.editor);
+                }
 			};
-			this.editor.customConfig.onchange = function(html){
-                _this.content = html;
-                _this.$emit('change', _this.content);
+            if (this.customUploadImg){
+                this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
+                    _this.$emit('customUploadImg', insertImgFn, resultFiles,_this.editor,_this.$refs.editor);
+                }
+            }
+            this.editor.config.withVideoCredentials = true;
+            this.editor.config.showLinkVideo = this.showLinkVideo;
+            this.editor.config.uploadVideoName = this.uploadVideoName;
+            this.editor.config.uploadVideoParams = this.uploadVideoParams;
+            this.editor.config.uploadVideoAccept = this.uploadVideoAccept;
+            this.editor.config.uploadVideoMaxSize = this.uploadVideoSize;
+            this.editor.config.uploadVideoHeaders = this.uploadVideoHeaders;
+            this.editor.config.uploadVideoTimeout =  this.uploadVideoTimeout;
+            this.editor.config.uploadVideoParamsWithUrl = this.uploadVideoParamsWithUrl;
+            if (this.uploadVideoServer !== '') {
+                this.editor.config.uploadVideoServer = this.uploadVideoServer;
+            }
+            this.editor.config.uploadVideoHooks = {
+                before: function(xhr){
+                    return _this.$emit('beforeVideo', xhr,{prevent:true,msg:'需要提示给用户的错误信息'},_this.editor,_this.$refs.editor);
+                },
+                fail: function(xhr, editor, result){
+                    _this.$emit('failVideo', xhr, editor, result,_this.editor,_this.$refs.editor);
+                },
+                success: function(xhr){
+                    _this.$emit('successVideo', xhr,_this.editor,_this.$refs.editor);
+                },
+                timeout: function(xhr){
+                    _this.$emit('timeoutVideo', xhr,_this.editor,_this.$refs.editor);
+                },
+                error: function(xhr, editor, result){
+                    _this.$emit('errorVideo', xhr, editor,result,_this.editor,_this.$refs.editor);
+                },
+                customInsert: function(insertVideoFn, result){
+                    _this.$emit('customInsertVideo', insertVideoFn, result,_this.editor,_this.$refs.editor);
+                }
+            };
+            if (this.customUploadVideo){
+                this.editor.config.customUploadVideo = function (resultFiles, insertVideoFn) {
+                    _this.$emit('customUploadVideo', insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                }
+            }
+            if (this.customInsertVideo){
+                this.editor.config.customInsertVideo = function (resultFiles, insertVideoFn) {
+                    _this.$emit('customInsertVideo', insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                }
+            }
+			this.editor.config.onchange = function(html){
+                _this.$emit('change',html,_this.editor,_this.$refs.editor);
 			}
 			if (this.debug){
-				this.editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1');
+				this.editor.config.debug = location.href.indexOf('wangeditor_debug_mode=1');
 			}
-			this.editor.create();
-			this.editor.$textElem.attr('contenteditable', !this.disabled);
+            this.editor && this.editor.create();
+            this.editor && this.editor.$textElem.attr('contenteditable', !this.disabled);
 		}
 	}
 }
 </script>
 
 <style lang="css" scoped>
-.editor {
-    width: 100%;
-    margin: 0 auto;
-    position: relative;
-    z-index: 0;
-}
-.toolbar {
-    flex-wrap: wrap;
-    border: 1px solid #ccc;
-}
-.text {
-    border: 1px solid #ccc;
-}
+
 </style>

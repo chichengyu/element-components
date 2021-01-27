@@ -752,16 +752,43 @@ export default {
 	
 	<!-- 所有属性 -->
 	<component-wang-editor style="width: 600px;" 
-       :height="350"
-       :disabled='false'
-       :isClear="false"
-       :headers='{}'
-       :debug='false'
-       @fail="handleFail" 
-       @success="handleSuccess" 
-       @timeout="handleTimeout" 
-       @error="handleError" 
-       @change="handleChange">
+        :height="350"
+        :disabled='false'
+        :isClear="false"
+        :headers='{}'
+        :debug='false'
+        :customUploadImg='customUploadImg'
+        :showLinkImg='true'
+        :uploadFileName='"file"'
+        :uploadImgServer='"/api/upload"'
+        :uploadImgMaxSize='2 * 1024 * 1024'
+        :uploadImgAccept="['jpg', 'jpeg', 'png', 'gif', 'bmp']"
+        :uploadImgMaxLength="5"
+        :uploadImgParams="{token: 'xxxxx',x: 100}"
+        :uploadImgParamsWithUrl="false"
+        :uploadImgHeaders="{}"
+        :uploadImgTimeout="5 * 1000"
+        :customUploadVideo="customUploadVideo"
+        :showLinkVideo="true"
+        :uploadVideoServer='"/api/upload"'
+        :uploadVideoName='"file"'
+        :uploadVideoHeaders='{}'
+        :uploadVideoParams='{token: 'xxxxx',x: 100}'
+        :uploadVideoParamsWithUrl='false'
+        :uploadVideoSize='1 * 1024 * 1024 * 1024' // 1024M
+        :uploadVideoTimeout='1000 * 60 * 5'
+        :uploadVideoAccept='["mp4"]'
+        @fail="handleFail" 
+        @success="handleSuccess" 
+        @timeout="handleTimeout" 
+        @error="handleError" 
+        @before="handleBefore" 
+        @failVideo="handleFail" 
+        @successVideo="handleSuccessVideo" 
+        @timeoutVideo="handleTimeoutVideo" 
+        @errorVideo="handleErrorVideo" 
+        @beforeVideo="handleBeforeVideo" 
+        @change="handleChange">
 	</component-wang-editor>
 
 </div>
@@ -779,18 +806,48 @@ export default {
         handleChange(val){
             console.log(val);
         },
-		handleFail(xhr, editor, result){
+		handleFail(xhr, editor, result, editor,editorDom){
             console.log(result);
         },
-        handleSuccess(xhr, editor, result){
+        handleSuccess(xhr, editor,editorDom){
             console.log(result);
         },
-        handleTimeout(xhr, editor){
+        handleTimeout(xhr, editor,editorDom){
             console.log(editor);
         },
-        handleError(xhr, editor){
+        handleError(xhr, editor, editor,editorDom){
             console.log(editor);
-        }
+        },
+        handleBefore(xhr, editor,editorDom){
+            // insertImgFn(imgUrl)
+            console.log(editor);
+        },
+        // 自定义上传图片 需要手动把上传后的视频插入到编辑器 insertImgFn(imgUrl)
+        customUploadImg(insertImgFn, resultFiles,editor,editorDom){
+            // insertImgFn(imgUrl)
+            console.log(editor);
+        },
+        // 自定义上传视频  需要手动把上传后的视频插入到编辑器 insertVideoFn(videoUrl)
+        customUploadVideo(insertVideoFn, resultFiles,editor,editorDom){
+            // insertVideoFn(videoUrl);
+            console.log(editor);
+        },
+        handleFailVideo(xhr, editor, result, editor,editorDom){
+            console.log(result);
+        },
+        handleSuccessVideo(xhr, editor,editorDom){
+            console.log(result);
+        },
+        handleTimeoutVideo(xhr, editor,editorDom){
+            console.log(editor);
+        },
+        handleErrorVideo(xhr, editor, editor,editorDom){
+            console.log(editor);
+        },
+        handleBeforeVideo(xhr, editor,editorDom){
+            // insertImgFn(imgUrl)
+            console.log(editor);
+        },
     }
 }
 ```
