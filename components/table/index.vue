@@ -123,7 +123,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <el-pagination v-if="data.page" :small="data.page.small||false" :align="data.page.align" @size-change="data.page.handleSizeChange" @current-change="data.page.currentChange" :page-sizes="data.page.pageSizes" :page-count="data.page.PageCount" :current-page="data.page.currentPage" :page-size="data.page.size||10" :layout="data.page.layout||'prev, pager, next'" :total="data.page.total" :background="data.page.background||true"></el-pagination>
+        <el-pagination v-if="data.page" :small="data.page.small||false" :align="data.page.align" @size-change="hanldeSizeChange" @current-change="data.page.currentChange" :page-sizes="data.page.pageSizes" :page-count="data.page.PageCount" :current-page="data.page.currentPage" :page-size="data.page.size||10" :layout="data.page.layout||'prev, pager, next'" :total="data.page.total" :background="data.page.background||true"></el-pagination>
         <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false"><img :src="previewUrl" width="100%" height="100%" alt=""></el-dialog>
     </div>
 </template>
@@ -196,10 +196,11 @@ export default {
         },
         handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
         handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
+        hanldeSizeChange(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
         handlePreview:function(src){
             this.previewUrl = src;
             this.visibled = true;
-        }
+        },
     },
 }
 var util = {};

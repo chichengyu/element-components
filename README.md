@@ -192,7 +192,7 @@ tableData: {
 	    small:false,// 默认false
 	    background:true,// 默认true
 	    pageSizes:[10,20],
-	    layout:'total, sizes, prev, pager, next, jumper',
+	    layout:'total, sizes, prev, pager, next, jumper',// 默认 prev, pager, next
 	    total:1,
 	    size:10,
 	    currentPage:1,
@@ -203,7 +203,7 @@ tableData: {
 	            this.tableData.loading = false;
 	        },1500)
 	    },
-	    handleSizeChange:(val) =>{
+	    sizeChange:(val) =>{// 不需要可去掉
 	        console.log('每页 '+val+ '条');
 	    }
         },
