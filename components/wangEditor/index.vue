@@ -1,5 +1,5 @@
 <template>
-    <div ref="editor" class="text" :style="{height:height+'px'}"></div>
+    <div ref="editor" class="editor"></div>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
 		},
 		height:{
 			type:Number,
-			default:200
+			default:300
 		},
 		isClear: {
 			type: Boolean,
@@ -117,7 +117,43 @@ export default {
             type:Array,
             default:function () {return ['mp4'];}
         },
-		debug:{
+        pasteTextHandle:{
+            type:Function,
+            defailt:function () { return function () {};}
+        },
+        emotions:{
+            type:Array,
+            default:function () {return [];}
+        },
+        lineHeights:{
+            type:Array,
+            default:function () {return [];}
+        },
+        colors:{
+            type:Array,
+            default:function () {return [];}
+        },
+        fontNames:{
+            type:Array,
+            default:function () {return [];}
+        },
+        fontSizes:{
+            type:Object,
+            default:function () {return {};}
+        },
+        highlight:{
+            type:Object,
+            default:function () {return {};}
+        },
+        showFullScreen:{
+			type:Boolean,
+			default: true
+		},
+        menus:{
+            type:Array,
+            default:function () {return [];}
+        },
+        debug:{
 			type:Boolean,
 			default: false
 		}
@@ -148,7 +184,8 @@ export default {
 			//this.editor = new E(this.$refs.toolbar, this.$refs.editor);
             this.editor = new E(this.$refs.editor);
 			this.editor.config.zIndex = 0;
-			this.editor.config.menus = [
+            this.editor.config.height = this.height;
+            this.editor.config.menus = this.menus.length<=0?[
                 'head',
                 'bold',
                 'fontSize',
@@ -173,7 +210,14 @@ export default {
                 'splitLine',
                 'undo',
                 'redo',
-			];
+			]:this.menus;
+            this.emotions.length>0 && (this.editor.config.emotions = this.emotions);
+            this.lineHeights.length>0 && (this.editor.config.lineHeights = this.lineHeights);
+            this.fontNames.length>0 && (this.editor.config.fontNames = this.fontNames);
+            this.colors.length>0 && (this.editor.config.colors = this.colors);
+            JSON.stringify(this.fontSizes) != "{}" && (this.editor.config.fontSizes = this.fontSizes);
+            JSON.stringify(this.highlight) != "{}" && (this.editor.config.highlight = this.highlight);
+            this.editor.config.showFullScreen = this.showFullScreen;
             this.editor.config.uploadFileName = this.uploadFileName;
             this.editor.config.onchangeTimeout = 1;
             this.editor.config.withCredentials = true;
@@ -213,7 +257,7 @@ export default {
 			};
             if (this.customUploadImg){
                 this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
-                    _this.$emit('customUploadImg', insertImgFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customUploadImg(insertImgFn, resultFiles,_this.editor,_this.$refs.editor);
                 }
             }
             this.editor.config.withVideoCredentials = true;
@@ -250,12 +294,17 @@ export default {
             };
             if (this.customUploadVideo){
                 this.editor.config.customUploadVideo = function (resultFiles, insertVideoFn) {
-                    _this.$emit('customUploadVideo', insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customUploadVideo(insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
                 }
             }
             if (this.customInsertVideo){
                 this.editor.config.customInsertVideo = function (resultFiles, insertVideoFn) {
-                    _this.$emit('customInsertVideo', insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customInsertVideo(insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                }
+            }
+            if (this.pasteTextHandle){
+                this.editor.config.pasteTextHandle = function (pasteStr) {
+                    _this.pasteTextHandle(pasteStr,_this.editor,_this.$refs.editor);
                 }
             }
 			this.editor.config.onchange = function(html){

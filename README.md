@@ -187,13 +187,26 @@ tableData: {
 		]
 	},
 	// 分页
-	page:{align:'right',total:1,size:10,currentPage:1,currentChange:(currentPage) => {
-		console.log('当前页',currentPage);
-		this.tableData.loading = true;
-		setTimeout(() => {
-			this.tableData.loading = false;
-		},1500)
-	}},
+	page:{
+	    align:'right',
+	    small:false,// 默认false
+	    background:true,// 默认true
+	    pageSizes:[10,20],
+	    layout:'total, sizes, prev, pager, next, jumper',
+	    total:1,
+	    size:10,
+	    currentPage:1,
+	    currentChange:(currentPage) => {
+	        console.log('当前页',currentPage);
+	        this.tableData.loading = true;
+	        setTimeout(() => {
+	            this.tableData.loading = false;
+	        },1500)
+	    },
+	    handleSizeChange:(val) =>{
+	        console.log('每页 '+val+ '条');
+	    }
+        },
 	// 排序
 	sortChange(obj,tableObject) {
 		console.log(10);
@@ -752,46 +765,56 @@ export default {
 	
 	<!-- 所有属性 -->
 	<component-wang-editor style="width: 600px;" 
-        :height="350"
-        :disabled='false'
-        :isClear="false"
-        :headers='{}'
-        :debug='false'
-        :customUploadImg='customUploadImg'
-        :showLinkImg='true'
-        :uploadFileName='"file"'
-        :uploadImgServer='"/api/upload"'
-        :uploadImgMaxSize='2 * 1024 * 1024'
-        :uploadImgAccept="['jpg', 'jpeg', 'png', 'gif', 'bmp']"
-        :uploadImgMaxLength="5"
-        :uploadImgParams="{token: 'xxxxx',x: 100}"
-        :uploadImgParamsWithUrl="false"
-        :uploadImgHeaders="{}"
-        :uploadImgTimeout="5 * 1000"
-        :customUploadVideo="customUploadVideo"
-        :showLinkVideo="true"
-        :uploadVideoServer='"/api/upload"'
-        :uploadVideoName='"file"'
-        :uploadVideoHeaders='{}'
-        :uploadVideoParams='{token: 'xxxxx',x: 100}'
-        :uploadVideoParamsWithUrl='false'
-        :uploadVideoSize='1 * 1024 * 1024 * 1024' // 1024M
-        :uploadVideoTimeout='1000 * 60 * 5'
-        :uploadVideoAccept='["mp4"]'
-        @fail="handleFail" 
-        @success="handleSuccess" 
-        @timeout="handleTimeout" 
-        @error="handleError" 
-        @before="handleBefore" 
-        @failVideo="handleFail" 
-        @successVideo="handleSuccessVideo" 
-        @timeoutVideo="handleTimeoutVideo" 
-        @errorVideo="handleErrorVideo" 
-        @beforeVideo="handleBeforeVideo" 
-        @change="handleChange">
+            :height="350"
+            :disabled='false'
+            :isClear="false"
+            :headers='{}'
+            :debug='false'
+            :customUploadImg='customUploadImg'
+            :showLinkImg='true'
+            :uploadFileName='"file"'
+            :uploadImgServer='"/api/upload"'
+            :uploadImgMaxSize='2 * 1024 * 1024'
+            :uploadImgAccept="['jpg', 'jpeg', 'png', 'gif', 'bmp']"
+            :uploadImgMaxLength="5"
+            :uploadImgParams="{token: 'xxxxx',x: 100}"
+            :uploadImgParamsWithUrl="false"
+            :uploadImgHeaders="{}"
+            :uploadImgTimeout="5 * 1000"
+            :customUploadVideo="customUploadVideo"
+            :showLinkVideo="true"
+            :uploadVideoServer='"/api/upload"'
+            :uploadVideoName='"file"'
+            :uploadVideoHeaders='{}'
+            :uploadVideoParams='{token: 'xxxxx',x: 100}'
+            :uploadVideoParamsWithUrl='false'
+            :uploadVideoSize='1 * 1024 * 1024 * 1024' // 1024M
+            :uploadVideoTimeout='1000 * 60 * 5'
+            :uploadVideoAccept='["mp4"]'
+            :pasteTextHandle='pasteTextHandle'
+            :emotions='[]'
+            :lineHeights='[]'
+            :colors='[]'
+            :fontNames='[]'
+            :fontSizes='{}'
+            :highlight='hljs'
+            :showFullScreen='true'
+            :menus='[]'
+            @fail="handleFail" 
+            @success="handleSuccess" 
+            @timeout="handleTimeout" 
+            @error="handleError" 
+            @before="handleBefore" 
+            @failVideo="handleFail" 
+            @successVideo="handleSuccessVideo" 
+            @timeoutVideo="handleTimeoutVideo" 
+            @errorVideo="handleErrorVideo" 
+            @beforeVideo="handleBeforeVideo" 
+            @change="handleChange">
 	</component-wang-editor>
 
 </div>
+import hljs from 'highlight.js'
 
 export default {
     data () {
@@ -847,6 +870,9 @@ export default {
         handleBeforeVideo(xhr, editor,editorDom){
             // insertImgFn(imgUrl)
             console.log(editor);
+        },
+        pasteTextHandle(value,editor,editorDom){
+            console.log('粘贴的内容');
         },
     }
 }
