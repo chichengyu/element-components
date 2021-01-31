@@ -764,7 +764,8 @@ export default {
 	<hr/>
 	
 	<!-- 所有属性 -->
-	<component-wang-editor style="width: 600px;" 
+	<component-wang-editor style="width: 600px;"
+            :params="{key:'额外参数'}"
             :height="350"
             :disabled='false'
             :isClear="false"
@@ -826,52 +827,52 @@ export default {
         debug:'开启debug模式'
     }，
     methods:{
-        handleChange(val){
-            console.log(val);
+        handleChange(val,params){
+            console.log(val,params);
         },
-		handleFail(xhr, editor, result, editor,editorDom){
+		handleFail(xhr, params, editor, result, editor,editorDom){
             console.log(result);
         },
-        handleSuccess(xhr, editor,editorDom){
+        handleSuccess(xhr, params, editor,editorDom){
             console.log(result);
         },
-        handleTimeout(xhr, editor,editorDom){
+        handleTimeout(xhr, params, editor,editorDom){
             console.log(editor);
         },
-        handleError(xhr, editor, editor,editorDom){
+        handleError(xhr, params, editor, editor,editorDom){
             console.log(editor);
         },
-        handleBefore(xhr, editor,editorDom){
+        handleBefore(xhr, params, editor,editorDom){
             // insertImgFn(imgUrl)
             console.log(editor);
         },
         // 自定义上传图片 需要手动把上传后的视频插入到编辑器 insertImgFn(imgUrl)
-        customUploadImg(insertImgFn, resultFiles,editor,editorDom){
+        customUploadImg(insertImgFn, resultFiles, params,editor,editorDom){
             // insertImgFn(imgUrl)
             console.log(editor);
         },
         // 自定义上传视频  需要手动把上传后的视频插入到编辑器 insertVideoFn(videoUrl)
-        customUploadVideo(insertVideoFn, resultFiles,editor,editorDom){
+        customUploadVideo(insertVideoFn, resultFiles, params,editor,editorDom){
             // insertVideoFn(videoUrl);
             console.log(editor);
         },
-        handleFailVideo(xhr, editor, result, editor,editorDom){
+        handleFailVideo(xhr, params, editor, result, editor,editorDom){
             console.log(result);
         },
-        handleSuccessVideo(xhr, editor,editorDom){
+        handleSuccessVideo(xhr, params, editor,editorDom){
             console.log(result);
         },
-        handleTimeoutVideo(xhr, editor,editorDom){
+        handleTimeoutVideo(xhr, params, editor,editorDom){
             console.log(editor);
         },
-        handleErrorVideo(xhr, editor, editor,editorDom){
+        handleErrorVideo(xhr, params, editor, editor,editorDom){
             console.log(editor);
         },
-        handleBeforeVideo(xhr, editor,editorDom){
+        handleBeforeVideo(xhr, params, editor,editorDom){
             // insertImgFn(imgUrl)
             console.log(editor);
         },
-        pasteTextHandle(value,editor,editorDom){
+        pasteTextHandle(value, params,editor,editorDom){
             console.log('粘贴的内容');
         },
     }

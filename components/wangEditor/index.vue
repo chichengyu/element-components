@@ -153,10 +153,14 @@ export default {
             type:Array,
             default:function () {return [];}
         },
+        params:{
+            type:Object,
+            default:function () {return {};}
+        },
         debug:{
 			type:Boolean,
 			default: false
-		}
+		},
 	},
 	watch: {
 		isClear:function(val) {
@@ -240,24 +244,24 @@ export default {
                     return _this.$emit('before', xhr,{prevent:true,msg:'需要提示给用户的错误信息'},_this.editor,_this.$refs.editor);
                 },
 				fail: function(xhr, editor, result){
-                    _this.$emit('fail', xhr, editor, result,_this.editor,_this.$refs.editor);
+                    _this.$emit('fail', xhr, editor, result,_this.params,_this.editor,_this.$refs.editor);
 				},
 				success: function(xhr){
-                    _this.$emit('success', xhr,_this.editor,_this.$refs.editor);
+                    _this.$emit('success', xhr,_this.params,_this.editor,_this.$refs.editor);
 				},
 				timeout: function(xhr){
-                    _this.$emit('timeout', xhr,_this.editor,_this.$refs.editor);
+                    _this.$emit('timeout', xhr,_this.params,_this.editor,_this.$refs.editor);
 				},
 				error: function(xhr, editor,result){
-                    _this.$emit('error', xhr, editor,result,_this.editor,_this.$refs.editor);
+                    _this.$emit('error', xhr, editor,result,_this.params,_this.editor,_this.$refs.editor);
 				},
                 customInsert: function(insertImg, result){
-                    _this.$emit('customInsert', insertImg, result,_this.editor,_this.$refs.editor);
+                    _this.$emit('customInsert', insertImg, result,_this.params,_this.editor,_this.$refs.editor);
                 }
 			};
             if (this.customUploadImg){
                 this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
-                    _this.customUploadImg(insertImgFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customUploadImg(insertImgFn, resultFiles,_this.params,_this.editor,_this.$refs.editor);
                 }
             }
             this.editor.config.withVideoCredentials = true;
@@ -274,41 +278,41 @@ export default {
             }
             this.editor.config.uploadVideoHooks = {
                 before: function(xhr){
-                    return _this.$emit('beforeVideo', xhr,{prevent:true,msg:'需要提示给用户的错误信息'},_this.editor,_this.$refs.editor);
+                    return _this.$emit('beforeVideo', xhr,{prevent:true,msg:'需要提示给用户的错误信息'},_this.params,_this.editor,_this.$refs.editor);
                 },
                 fail: function(xhr, editor, result){
-                    _this.$emit('failVideo', xhr, editor, result,_this.editor,_this.$refs.editor);
+                    _this.$emit('failVideo', xhr, editor, result,_this.params,_this.editor,_this.$refs.editor);
                 },
                 success: function(xhr){
-                    _this.$emit('successVideo', xhr,_this.editor,_this.$refs.editor);
+                    _this.$emit('successVideo', xhr,_this.params,_this.editor,_this.$refs.editor);
                 },
                 timeout: function(xhr){
-                    _this.$emit('timeoutVideo', xhr,_this.editor,_this.$refs.editor);
+                    _this.$emit('timeoutVideo', xhr,_this.params,_this.editor,_this.$refs.editor);
                 },
                 error: function(xhr, editor, result){
-                    _this.$emit('errorVideo', xhr, editor,result,_this.editor,_this.$refs.editor);
+                    _this.$emit('errorVideo', xhr, editor,result,_this.params,_this.editor,_this.$refs.editor);
                 },
                 customInsert: function(insertVideoFn, result){
-                    _this.$emit('customInsertVideo', insertVideoFn, result,_this.editor,_this.$refs.editor);
+                    _this.$emit('customInsertVideo', insertVideoFn, result,_this.params,_this.editor,_this.$refs.editor);
                 }
             };
             if (this.customUploadVideo){
                 this.editor.config.customUploadVideo = function (resultFiles, insertVideoFn) {
-                    _this.customUploadVideo(insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customUploadVideo(insertVideoFn, resultFiles,_this.params,_this.editor,_this.$refs.editor);
                 }
             }
             if (this.customInsertVideo){
                 this.editor.config.customInsertVideo = function (resultFiles, insertVideoFn) {
-                    _this.customInsertVideo(insertVideoFn, resultFiles,_this.editor,_this.$refs.editor);
+                    _this.customInsertVideo(insertVideoFn, resultFiles,_this.params,_this.editor,_this.$refs.editor);
                 }
             }
             if (this.pasteTextHandle){
                 this.editor.config.pasteTextHandle = function (pasteStr) {
-                    _this.pasteTextHandle(pasteStr,_this.editor,_this.$refs.editor);
+                    _this.pasteTextHandle(pasteStr,_this.params,_this.editor,_this.$refs.editor);
                 }
             }
 			this.editor.config.onchange = function(html){
-                _this.$emit('change',html,_this.editor,_this.$refs.editor);
+                _this.$emit('change',html,_this.params,_this.editor,_this.$refs.editor);
 			}
 			if (this.debug){
 				this.editor.config.debug = location.href.indexOf('wangeditor_debug_mode=1');
