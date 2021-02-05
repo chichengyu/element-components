@@ -541,6 +541,7 @@ form:{
 	<component-dialog
 	   :title="'Dialog弹窗'"
 	   :width="50"
+	   :footer="false"
 	   :visible.sync="dialogVisible"
 	   :appendToBody='false'
 	   @handleCancel="handleCancel"
