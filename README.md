@@ -2,7 +2,7 @@
 
 #### 介绍
 
-基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用,
+基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用，文档写的可能不完整，请耐心看下面的实例。
 
 *注：本人这里使用的是 element-ui@2.11.1 / element-ui@2.13.0，vue@2.6。
 
@@ -537,7 +537,7 @@ form:{
 <div class="dialog">
 	<el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 	<!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true
-	width：可以为 number 50,20..., string '500px' -->
+	width：可以为 number 50,20..., string '500px' ，:footer="false"　底部可不要且自己自定义-->
 	<component-dialog
 	   :title="'Dialog弹窗'"
 	   :width="50"
@@ -826,6 +826,7 @@ export default {
         isdisable:'是否禁用',
         headers:'请求头设置',
         debug:'开启debug模式'
+		// ...其他属性就不一一列举了
     }，
     methods:{
         handleChange(val,params){

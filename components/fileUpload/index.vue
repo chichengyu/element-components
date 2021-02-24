@@ -1,6 +1,6 @@
 <template>
     <div class="file-upload">
-        <el-upload :name="name" class="avatar-uploader"
+        <el-upload ref="fileUpload" :name="name" class="avatar-uploader"
             :action="action"
             :show-file-list="showFileList"
             :disabled="disabled"
@@ -76,14 +76,14 @@ export default {
     },
     methods: {
         handleBefore:function(file){
-            return this.$emit('before',file,this.params);
+            return this.$emit('before',file,this.$refs.fileUpload,this.params);
         },
         handleSuccess:function(response, file, fileList){
             this.fileImageList = fileList;
-            this.$emit('success',response, file, fileList,this.params);
+            this.$emit('success',response, file,this.$refs.fileUpload, fileList,this.params);
         },
         handleError:function(err, file, fileList){
-            this.$emit('error',err, file, fileList,this.params);
+            this.$emit('error',err, file,this.$refs.fileUpload, fileList,this.params);
         }
     }
 }
