@@ -1,5 +1,5 @@
 <template>
-    <el-dialog
+    <el-dialog ref="dialog"
         :title="title"
         :visible.sync="$attrs.visible"
         :width="'number'==typeof width?width+'%':width"
@@ -37,10 +37,15 @@ export default {
         appendToBody:{
             type:Boolean,
             default: false
+        },
+        beforeClose:{
+            type:Function,
+            default:function () {return function () {}}
         }
     },
     methods: {
         handleClose:function(done) {
+            this.beforeClose(this.$refs.dialog,done);
             this.$emit('update:visible',false);
             done();
         },

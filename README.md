@@ -541,9 +541,11 @@ form:{
 	<component-dialog
 	   :title="'Dialog弹窗'"
 	   :width="50"
-	   :footer="false"
+	   :footer="false" // 关闭底部
+	   :close="false" // 是否点击周围关闭弹窗
 	   :visible.sync="dialogVisible"
 	   :appendToBody='false'
+	   :beforeClose='handleClose'
 	   @handleCancel="handleCancel"
 	   @handleOk="handleOk">
 		<div slot="dialog">
@@ -561,6 +563,11 @@ export default {
         }
     },
     methods:{
+        // 关闭之前的函数
+        handleDialogClose(dom,done){
+            console.log(10,dom);// 当前弹窗 dialog dom
+            console.log(20,done);// 关闭函数
+        },
         handleCancel(){
             console.log('取消了');
         },
