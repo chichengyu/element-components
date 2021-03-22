@@ -215,8 +215,8 @@ util.treeTableXcode = function(data,xcode,xgrade,treeKey){
         }else{
             item._xcode = xcode + i;
             item._xgrade = xgrade;
-            if(item.children && item.children.length > 0){
-                util.treeTableXcode(item.children,item._xcode+"-",xgrade+1,treeKey);
+            if(item[treeKey] && item[treeKey].length > 0){
+                util.treeTableXcode(item[treeKey],item._xcode+"-",xgrade+1,treeKey);
             }
         }
     }
