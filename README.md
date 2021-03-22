@@ -221,7 +221,7 @@ tableData: {
 }
 ```
 #### treetable
-树形表格比表格 table 多了一个属性``` tree:true ```与列属性 ``` hasChildren:true ```
+树形表格比表格 table 多了一个属性``` tree:true ```与列属性 ``` hasChildren:true ```，```treeKey``` 为树形表格子级 `key` ,默认 `children`，可注释
 ```
 # field
 {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
@@ -230,7 +230,7 @@ tableData: {
 # 数据结构
 tableData: {
 	tree:true,// true 为树形表格
-
+	treeKey:'children',// treeKey 为树形表格子级 key ,默认 children，可注释
 	// ......
 }
 ```
