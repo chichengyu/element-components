@@ -176,7 +176,7 @@ export default {
         disabled: {
             immediate:true,
             deep:true,
-            handler(val){this.editor && this.editor.$textElem.attr('contenteditable', !val);}
+            handler:function(val){this.editor && this.editor.$textElem.attr('contenteditable', !val);}
         }
 	},
 	mounted:function() {

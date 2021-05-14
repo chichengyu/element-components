@@ -197,7 +197,7 @@ export default {
         },
         handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
         handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
-        hanldeSizeChange(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
+        hanldeSizeChange:function(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
         handlePreview:function(src){
             this.previewUrl = src;
             this.visibled = true;
