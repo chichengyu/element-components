@@ -1,12 +1,12 @@
 {
   "name": "element-component",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "description": "基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图轮子，方便使用",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "xiaochi",
+  "author": "xiaochi QQ875267425",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
