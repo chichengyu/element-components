@@ -3,14 +3,14 @@
         :title="title"
         :visible.sync="$attrs.visible"
         :width="'number'==typeof width?width+'%':width"
-        :close-on-click-modal="close"
+        :close-on-click-modal="closeOnClickModal"
         :append-to-body="appendToBody"
-        :before-close="handleClose"
+        :before-close="handleBeforeClose"
         :destroy-on-close="true">
         <slot name="dialog"></slot>
         <div v-if="footer" slot="footer" class="dialog-footer">
-            <el-button @click="handleDialog('handleCancel')">取 消</el-button>
-            <el-button type="primary" @click="handleDialog('handleOk')">确 定</el-button>
+            <el-button :size="footerBtnSize" @click="handleDialog('handleCancel',1)">取 消</el-button>
+            <el-button :size="footerBtnSize" type="primary" @click="handleDialog('handleOk',2)">确 定</el-button>
         </div>
     </el-dialog>
 </template>
@@ -30,7 +30,11 @@ export default {
             type:Boolean,
             default: true
         },
-        close:{
+        footerBtnSize:{
+            type:String,
+            default: ""
+        },
+        closeOnClickModal:{
             type:Boolean,
             default: false
         },
@@ -41,16 +45,26 @@ export default {
         beforeClose:{
             type:Function,
             default:function () {return function () {}}
+        },
+        beforeCancel:{
+            type:Function,
+            default:function () {return function () {}}
+        },
+        beforeOk:{
+            type:Function,
+            default:function () {return function () {}}
         }
     },
     methods: {
-        handleClose:function(done) {
+        handleBeforeClose:function(done) {
             this.beforeClose(this.$refs.dialog,done);
             this.$emit('update:visible',false);
             done();
         },
-        handleDialog:function(key){
-            this.$parent.hasOwnProperty(key) && this.$parent[key]();
+        handleDialog:function(key,type){
+            type==1 && this.beforeCancel(this.$refs.dialog);
+            type==2 && this.beforeOk(this.$refs.dialog);
+            this.$parent.hasOwnProperty(key) && this.$parent[key](this.$refs.dialog);
             this.$emit('update:visible',false);
         }
     }

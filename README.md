@@ -397,7 +397,7 @@ form:{
 		{prop: 'password', title: '方式一扩展', type: 'slot',slot:'formItem'},
 		{prop: 'password', title: '方式一扩展1', type: 'slot',slot:'formItem1'},
 		{prop: 'password', title: '方式一扩展2', type: 'slot',slot:'formItem2'},
-		{prop: 'text', title: '文本域', type: 'textarea',placeholder: '我是自定义内容'},
+		{prop: 'text', title: '文本域',type: 'textarea',maxlength:10,rows:6,placeholder: '我是自定义内容'},
 		// *** 注意： parent 是为了让选择父级的时候，不能选择自己为父级，如果不需要，可以直接去掉 parent 属性
 		// default:{show:true,value:''} 默认选择，可以不设置，设置了 选项中显示 '请选择'
       	{prop: 'select', title: '下拉选择',type: 'select',parent:'selectParent',key:'label',value:'value',default:{show:true,value:''},options:[
@@ -546,10 +546,13 @@ form:{
 	   :title="'Dialog弹窗'"
 	   :width="50"
 	   :footer="false" // 关闭底部
-	   :close="false" // 是否点击周围关闭弹窗
+	   :footerBtnSize="'mini'" // 底部按钮 size ,默认为 ''	   
+	   :closeOnClickModal="false" // 是否点击周围关闭弹窗
 	   :visible.sync="dialogVisible"
 	   :appendToBody='false'
-	   :beforeClose='handleClose'
+	   :beforeClose='handleBeforeClose'
+	   :beforeCancel='handleBeforeCancel'
+	   :beforeOk='handleBeforeOk'	   
 	   @handleCancel="handleCancel"
 	   @handleOk="handleOk">
 		<div slot="dialog">
@@ -568,16 +571,22 @@ export default {
     },
     methods:{
         // 关闭之前的函数
-        handleDialogClose(dom,done){
-            console.log(10,dom);// 当前弹窗 dialog dom
+        handleBeforeClose(dialogDom,done){
+            console.log(10,dialogDom);// 当前弹窗 dialog dom
             console.log(20,done);// 关闭函数
         },
-        handleCancel(){
-            console.log('取消了');
+        handleCancel(dialogDom){
+            console.log('取消了',dialogDom);
         },
-        handleOk(){
-            console.log('确定了');
+        handleOk(dialogDom){
+            console.log('确定了',dialogDom);
         }
+        handleBeforeCancel(dialogDom){
+            console.log('取消之前执行',dialogDom);
+        }
+        handleBeforeOk(dialogDom){
+            console.log('确定之前执行',dialogDom);
+        }		
     }
 }
 ```
