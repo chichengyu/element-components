@@ -124,7 +124,7 @@
             </el-table-column>
         </el-table>
         <el-pagination v-if="data.page" :small="data.page.small||false" :align="data.page.align" @size-change="hanldeSizeChange" @current-change="data.page.currentChange" :page-sizes="data.page.pageSizes" :page-count="data.page.PageCount" :current-page="data.page.currentPage" :page-size="data.page.size||10" :layout="data.page.layout||'prev, pager, next'" :total="data.page.total" :background="data.page.background||true"></el-pagination>
-        <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false"><img :src="previewUrl" width="100%" height="100%" alt=""></el-dialog>
+        <el-dialog title="预览" :visible.sync="visibled" :close-on-click-modal="false" append-to-body><img :src="previewUrl" width="100%" height="100%" alt=""></el-dialog>
     </div>
 </template>
 

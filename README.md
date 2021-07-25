@@ -2,9 +2,9 @@
 
 #### 介绍
 
-基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用，文档写的可能不完整，请耐心看下面的实例。
+基于element-ui做的table表格，form表单，treeTable树形表格，upload上传图片，wangeditor富文本，file-upload文件上传，preview查看大图，popover提示，方便使用，文档写的可能不完整，请耐心看下面的示例。
 
-*注：本人这里使用的是 element-ui@2.11.1 / element-ui@2.13.0，vue@2.6。
+*注：本人这里使用的是 element-ui@2.11.1 / element-ui@2.13.0 / element-ui@2.15.*，vue@2.6。
 
 
 
@@ -538,6 +538,23 @@ form:{
 #### dialog
 此处 `dialog` 的`width`的值可以`number(50,20,...百分比,不用加 %)，string('500px')`
 ```
+# 快速使用
+<div class="dialog">
+	<el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
+	<!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true
+	width：可以为 number 50,20..., string '500px' ，:footer="false"　底部可不要且自己自定义-->
+	<component-dialog
+	   :title="'Dialog弹窗'"
+	   :width="50"
+	   :visible.sync="dialogVisible">
+		<div slot="dialog">
+			<span>这是 Dialog 弹窗封装组件</span>
+			<component-upload :action="'#'" :previewImages="url" :appendToBody="true"></component-upload>
+		</div>
+	</component-dialog>
+</div>
+
+# 所有属性
 <div class="dialog">
 	<el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 	<!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true
@@ -613,7 +630,7 @@ export default {
 		:accept='".jpg,.jpeg,.png"'
 		:data='data'
 		:autoUpload='true'
-		:httpRequest="httpRequest"
+		:httpRequest="httpRequest" // 自定义上传
 		@before="handleBefore"
 		@success="handleSuccess"
 		@remove="handleRemove"
@@ -642,7 +659,7 @@ export default {
 		:data='data'
 		:autoUpload='true'
 		:showFileList='true'
-		:httpRequest="httpRequest"
+		:httpRequest="httpRequest" // 自定义上传
 		@before="handleBefore"
 		@success="handleSuccess"
 		@remove="handleRemove"
