@@ -90,7 +90,7 @@
                 </el-table-column>
             </template>
             <el-table-column v-if="data.tableOption"
-                fixed="right"
+                :fixed="data.tableOption.fixed||false"
                 :label="data.tableOption.label"
                 :width="data.tableOption.width"
                 :align="data.tableOption.align||'center'">

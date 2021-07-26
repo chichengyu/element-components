@@ -158,6 +158,7 @@ tableData: {
 	// 操作
 	tableOption:{
 		label:'操作',
+		fixed:'false',// true, left, right,固定在左侧或者右侧，true 表示固定在左侧,false 或 '' 表示不固定
 		width:230,
 		slot:true,// 按钮操作扩展，不扩展时去掉或改为false
 		buttons:[
