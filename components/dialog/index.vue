@@ -72,5 +72,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
-
+.el-dialog__wrapper >>>.el-dialog__body{
+    overflow: hidden;
+}
 </style>
