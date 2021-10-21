@@ -68,53 +68,6 @@ this.validator.isRegExpChinese(val);
 this.validator.isRegExpDate(val);
 this.validator.isRegExpUrl(val);
 this.validator.isRegExpInteger(val);
-# util 工具方法
-### objectCopy 对象属性复制
-this.util.objectCopy(source,dest);// 返回复制失败的属性新对象
-
-### randomNumber 任意长度的随机字符(可指定长度)
-console.log(this.util.randomNumber());// 任意长度
-console.log(this.util.randomNumber(5));// 指定长度
-
-### handleGetParams GET路径参数处理
-console.log(this.util.handleGetParams({pageNum:1,pageSize:10}));// http:// xxxx?pageNum=1&pageSize=10
-
-### clipboard 点击复制内容
-<el-button @click="handleClick">点我复制</el-button>
-<div id="linkText">我是被复制的内容</div>
-// ...
-this.util.clipboard(document.getElementById('linkText'),dom => this.success('复制成功'),e => this.error('复制失败'));
-
-### createFileBlobReadUrl 创建临时 blob 流预览路径
-this.util.createFileBlobReadUrl(file,result => console.log(result));
-
-### cache 设置/获取/删除缓存(localStorage)
-this.util.cache(key,val);// 设置
-this.util.cache(key);// 获取
-this.util.cacheRemove(key);// 移除
-
-### formatDatetime 日期时间格式化
-console.log(this.util.formatDatetime(Date.now()));
-console.log(this.util.formatDatetime(Date.now(),'yyyy-MM-dd HH:mm:ss'));
-console.log(this.util.formatDatetime(Date.now(),'yyyy-MM-dd HH:mm:ss',':'));
-
-### exportExcel 文件流导出 excel
-let options = {
-    method: "get",
-    url: url, // 请求地址
-    params: {pageNum:1, pageSize:20}, // 参数
-    responseType: "blob", // 表明返回服务器返回的数据类型
-    headers:{
-        "content-type":"application/json;charset=UTF-8",
-        'Authorization':'eyJhbGciOiJIUzI1NiJ9.eyJzYWx0IjoiUkFBSlhBY2Q4c0I2VHVRMUZ2UmpYRG8wd2dVOXdpQ1UiLCJ1c2VySWQiOiI3ODk0OTAzOTU3NzU3NjY1MjgifQ.42qN7_V8_OvR9s50aGp4XmST54HntDc0_ePJ9TS0KwY'
-    }
-};
-// 调用
-this.util.exportExcel(this.axios,Date.now()+'----excel',options);
-// ... 也可以自定义导出，四个参数 isCustom 传递为 true，则不会导出
-this.util.exportExcel(this.axios,Date.now()+'----excel',options,true).then(data => {
-    // ... 自定义导出，data为文件流
-});
 ```
 #### message
 提供了 message, warning, success, error, alert, prompt, confirm 的居中
@@ -145,6 +98,56 @@ this.confirm(title,() => {
 },() => {
 	console.log('取消...');
 },options={},content='')
+```
+#### util
+```
+# util 工具方法
+# objectCopy 对象属性复制
+this.util.objectCopy(source,dest);// 返回复制失败的属性新对象
+
+# randomNumber 任意长度的随机字符(可指定长度)
+console.log(this.util.randomNumber());// 任意长度
+console.log(this.util.randomNumber(5));// 指定长度
+
+# handleGetParams GET路径参数处理
+console.log(this.util.handleGetParams({pageNum:1,pageSize:10}));// http:// xxxx?pageNum=1&pageSize=10
+
+# clipboard 点击复制内容
+<el-button @click="handleClick">点我复制</el-button>
+<div id="linkText">我是被复制的内容</div>
+// ...
+this.util.clipboard(document.getElementById('linkText'),dom => this.success('复制成功'),e => this.error('复制失败'));
+
+# createFileBlobReadUrl 创建临时 blob 流预览路径
+this.util.createFileBlobReadUrl(file,result => console.log(result));
+
+# cache 设置/获取/删除缓存(localStorage)
+this.util.cache(key,val);// 设置
+this.util.cache(key);// 获取
+this.util.cacheRemove(key);// 移除
+
+# formatDatetime 日期时间格式化
+console.log(this.util.formatDatetime(Date.now()));
+console.log(this.util.formatDatetime(Date.now(),'yyyy-MM-dd HH:mm:ss'));
+console.log(this.util.formatDatetime(Date.now(),'yyyy-MM-dd HH:mm:ss',':'));
+
+# exportExcel 文件流导出 excel
+let options = {
+    method: "get",
+    url: url, // 请求地址
+    params: {pageNum:1, pageSize:20}, // 参数
+    responseType: "blob", // 表明返回服务器返回的数据类型
+    headers:{
+        "content-type":"application/json;charset=UTF-8",
+        'Authorization':'eyJhbGciOiJIUzI1NiJ9.eyJzYWx0IjoiUkFBSlhBY2Q4c0I2VHVRMUZ2UmpYRG8wd2dVOXdpQ1UiLCJ1c2VySWQiOiI3ODk0OTAzOTU3NzU3NjY1MjgifQ.42qN7_V8_OvR9s50aGp4XmST54HntDc0_ePJ9TS0KwY'
+    }
+};
+// 调用
+this.util.exportExcel(this.axios,Date.now()+'----excel',options);
+// ... 也可以自定义导出，四个参数 isCustom 传递为 true，则不会导出
+this.util.exportExcel(this.axios,Date.now()+'----excel',options,true).then(data => {
+    // ... 自定义导出，data为文件流
+});
 ```
 #### table
 ```
