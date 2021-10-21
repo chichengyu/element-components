@@ -212,16 +212,16 @@ tableData: {
 	    }
         },
 	// 排序
-	sortChange(obj,tableObject) {
-		console.log(10);
-		console.log(obj);
-		console.log('当前表格对象',tableObject);
+	sortChange:(obj,tableObject) {
+	     console.log(10);
+	     console.log(obj);
+	     console.log('当前表格对象',tableObject);
 	},
 	// 表格实现多选时的 change 事件
-    selectionChange(params,tableObject){
-        console.log('选择项改变时的值',params);
-        console.log('表格对象',tableObject);
-    },
+	selectionChange:(params,tableObject){
+	     console.log('选择项改变时的值',params);
+	     console.log('表格对象',tableObject);
+	},
 }
 ```
 #### treetable
@@ -895,6 +895,7 @@ export default {
         customUploadVideo(insertVideoFn, resultFiles, params,editor,editorDom){
             // insertVideoFn(videoUrl);
             console.log(editor);
+            insertVideoFn(URL.createObjectURL(resultFiles[0]));// 创建临时 blob 流
         },
         handleFailVideo(xhr, params, editor, result, editor,editorDom){
             console.log(result);
