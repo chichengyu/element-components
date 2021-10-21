@@ -159,7 +159,7 @@ export default {
      */
     exportExcel:function(axios,fileName,options,isCustom){
         //options.responseType = "blob";// 表明返回服务器返回的数据类型
-        options.headers && !options.headers.contentType && (options.headers.contentType = "application/json;charset=UTF-8");
+        options.headers && !options.headers.ContentType && (options.headers.ContentType = "application/json;charset=UTF-8");
         return new Promise((resolve,reject) => {
             axios(Object.assign({responseType:"blob"},options)).then((response) => {
                 resolve(response.data);
