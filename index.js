@@ -8,11 +8,13 @@ import upload from './components/upload'
 import fileUpload from './components/fileUpload'
 import wangEditor from './components/wangEditor'
 import validate from './utils/validate.js'
+import util from './utils/util.js'
 import { message, warning, success, error, alert, prompt, confirm} from './utils/message.js'
 
 export default {
     install:function(Vue, options) {
         Vue.prototype.axios = axios;
+        Vue.prototype.util = util;
         Vue.prototype.validator = validate;
         Vue.prototype.message = message;
         Vue.prototype.warning = warning;
