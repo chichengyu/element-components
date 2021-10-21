@@ -4,7 +4,7 @@ export default {
      * @param file 文件对象
      * @param callback 回调
      */
-    createFileBlobReadUrl: function(file, callback){
+    createFileBlobReadUrl:function(file, callback){
         if (file) {
             var fileReader = new FileReader();
             fileReader.readAsDataURL(file);
@@ -29,7 +29,7 @@ export default {
      * @param dest 目标对象
      * @returns {{}} 返回复制失败的属性新对象
      */
-    objectCopy: function(source, dest){
+    objectCopy:function(source, dest){
         var obj = {};
         if (source && dest) {
             for (var key in dest) {
@@ -47,7 +47,7 @@ export default {
      * @param data
      * @returns {string}
      */
-    handleGetParams: function(data){
+    handleGetParams:function(data){
         var searchWords = '', count = 0;
         if (data) {
             for (var key in data) {
@@ -65,7 +65,7 @@ export default {
      * @param val
      * @returns {string|any|void}
      */
-    cache: function(key, val){
+    cache:function(key, val){
         if (val) return localStorage.setItem(key, JSON.stringify(val));
         var item = localStorage.getItem(key);
         if (item) return JSON.parse(item);
@@ -107,6 +107,7 @@ export default {
                 callback && callback(dom);
             });
         }catch (e) {
+            console.log('%c ! clipboard catch', 'background:#000;color:#bada55',e);
             error && error(e);
         }
     },
@@ -116,7 +117,7 @@ export default {
      * @param split
      * @returns {string|number}
      */
-    formatDatetime: function (date,partten, split) {
+    formatDatetime:function (date,partten, split){
         if (date == '' || date == null || date == undefined)return;
         partten = partten || 'yyyy-MM-dd';
         split = split || '';
@@ -162,10 +163,10 @@ export default {
             axios(Object.assign({responseType:"blob"},options)).then((response) => {
                 resolve(response.data);
                 if (isCustom){
-                    return ;
+                    return;
                 }
                 var blob = new Blob([response.data],{type: "application/vnd.ms-excel",});
-                fileName = fileName.indexOf(".") > -1 ? fileName : fileName + ".xls";
+                fileName = fileName.toString().indexOf(".") > -1 ? fileName : fileName + ".xls";
                 if (window.navigator.msSaveOrOpenBlob) {
                     navigator.msSaveBlob(blob, fileName);
                 } else {
@@ -179,9 +180,9 @@ export default {
             }, (err) => {
                 console.log('%c ! Export Error', 'background:#000;color:#bada55', err);
                 reject(err);
-            }).catch(error => {
+            }).catch(err => {
                 console.log('%c ! Export Catch', 'background:#000;color:#bada55', err);
-                reject(error);
+                reject(err);
             });
         });
     }
