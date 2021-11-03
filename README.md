@@ -110,7 +110,7 @@ console.log(this.util.randomNumber());// 任意长度
 console.log(this.util.randomNumber(5));// 指定长度
 
 # handleGetParams GET路径参数处理
-console.log(this.util.handleGetParams({pageNum:1,pageSize:10}));// http:// xxxx?pageNum=1&pageSize=10
+console.log(this.util.handleGetParams({pageNum:1,pageSize:10}));// ?pageNum=1&pageSize=10
 
 # clipboard 点击复制内容
 <el-button @click="handleClick">点我复制</el-button>
@@ -136,7 +136,7 @@ let options = {
     method: "get",
     url: url, // 请求地址
     params: {pageNum:1, pageSize:20}, // 参数
-    responseType: "blob", // 表明返回服务器返回的数据类型
+    responseType: "blob", // 可不要，默认会请求的时候加上,表明返回服务器返回的数据类型
     headers:{
         "content-type":"application/json;charset=UTF-8",
         'Authorization':'eyJhbGciOiJIUzI1NiJ9.eyJzYWx0IjoiUkFBSlhBY2Q4c0I2VHVRMUZ2UmpYRG8wd2dVOXdpQ1UiLCJ1c2VySWQiOiI3ODk0OTAzOTU3NzU3NjY1MjgifQ.42qN7_V8_OvR9s50aGp4XmST54HntDc0_ePJ9TS0KwY'
@@ -144,7 +144,7 @@ let options = {
 };
 // 调用
 this.util.exportExcel(this.axios,Date.now()+'----excel',options);
-// ... 也可以自定义导出，四个参数 isCustom 传递为 true，则不会导出
+// ... 也可以自定义导出，第四个参数 isCustom 传递为 true，则不会导出
 this.util.exportExcel(this.axios,Date.now()+'----excel',options,true).then(data => {
     // ... 自定义导出，data为文件流
 });
@@ -173,7 +173,7 @@ tableData: {
 	loading:false,
 	loadingText:'Loading',// 默认 Loading
 	table_msg_empty:'',// 默认空
-	defaultSort:{prop:'id',order:'ascending'},// 可去掉，默认element ui table 组件 default-sort属性 {prop:'id',order:'ascending'} // descending
+	defaultSort:{prop:'id',order:'ascending'},// 可去掉(在对应的列上加属性`sort`,值为`sortable`、`custom`)，默认element ui table 组件 default-sort属性 {prop:'id',order:'ascending'} // descending
 	border:true,// 是否边框
 	size:'small',// table表格模式
 	stripe:true,// 是否为斑马纹 table
@@ -190,7 +190,7 @@ tableData: {
 	// 列
 	tableLabel:[
 		{type:'selection',align:'center'},
-		{type:'index',fixed:'left'},
+		{type:'index',fixed:'left',sort:'sortable'},// sort 排序
 		{prop:'id',title:'ID',type:'index',fixed:true,width:80,align:'center',style:(params,item)=>{return {color:'red'}}},
 		{prop:'img',title:'缩略图',isPreview:true,width:100,style:(params,col) => {
 			return {height:'50px'}
