@@ -173,7 +173,7 @@ tableData: {
 	loading:false,
 	loadingText:'Loading',// 默认 Loading
 	table_msg_empty:'',// 默认空
-	defaultSort:{prop:'id',order:'ascending'},// 可去掉(在对应的列上加属性`sort`,值为`sortable`、`custom`)，默认element ui table 组件 default-sort属性 {prop:'id',order:'ascending'} // descending
+	defaultSort:{prop:'id',order:'ascending'},// 可去掉,或者在对应的列上加属性`sort`,值为`sortable`、`custom`也可实现排序，默认element ui table 组件 default-sort属性 {prop:'id',order:'ascending'} // descending
 	border:true,// 是否边框
 	size:'small',// table表格模式
 	stripe:true,// 是否为斑马纹 table
