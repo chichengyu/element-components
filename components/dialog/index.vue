@@ -9,8 +9,8 @@
         :destroy-on-close="true">
         <slot name="dialog"></slot>
         <div v-if="footer" slot="footer" class="dialog-footer">
-            <el-button :size="footerBtnSize" @click="handleDialog('handleCancel',1)">取 消</el-button>
-            <el-button :size="footerBtnSize" type="primary" @click="handleDialog('handleOk',2)">确 定</el-button>
+            <el-button :size="footerBtnSize" @click="handleDialog('cancel',1)">取 消</el-button>
+            <el-button :size="footerBtnSize" type="primary" @click="handleDialog('ok',2)">确 定</el-button>
         </div>
     </el-dialog>
 </template>
@@ -62,8 +62,14 @@ export default {
             done();
         },
         handleDialog:function(key,type){
-            type==1 && this.beforeCancel(this.$refs.dialog);
-            type==2 && this.beforeOk(this.$refs.dialog);
+            if (type==1){
+              this.beforeCancel(this.$refs.dialog);
+              this.$emit('cancel',this.$refs.dialog);
+            }
+            if (type==2){
+              this.beforeOk(this.$refs.dialog);
+              this.$emit('ok',this.$refs.dialog);
+            }
             this.$parent.hasOwnProperty(key) && this.$parent[key](this.$refs.dialog);
             this.$emit('update:visible',false);
         }

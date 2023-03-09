@@ -621,8 +621,8 @@ form:{
 	   :beforeClose='handleBeforeClose'
 	   :beforeCancel='handleBeforeCancel'
 	   :beforeOk='handleBeforeOk'	   
-	   @handleCancel="handleCancel"
-	   @handleOk="handleOk">
+	   @cancel="handleCancel"
+	   @ok="handleOk">
 		<div slot="dialog">
 			<span>这是 Dialog 弹窗封装组件</span>
 			<component-upload :action="'#'" :previewImages="url" :appendToBody="true"></component-upload>
@@ -657,6 +657,7 @@ export default {
         }		
     }
 }
+注意：element 中在弹窗嵌套弹窗的时候，必须加上 ``` append-to-body ```，而这里是 ```appendToBody='true'```,且 ```beforeClose```、```beforeCancel```、```beforeOk``` 虽然是属性，但均为函数。
 ```
 #### upload
 ```
