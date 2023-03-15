@@ -227,7 +227,7 @@ tableData: {
 				console.log(currentBtn);
 				console.log('当前表格对象',params._self);
 			}},
-			{title:'删除',type:'danger',plain:true,icon:'el-icon-delete',header:'确定要删除吗？',tooltip:true,click:{
+			{title:'删除',type:'danger',plain:true,icon:'el-icon-delete',trigger:'click',header:'确定要删除吗？',tooltip:true,click:{
 				ok:(params,currentBtn) => {
 					console.log('确认删除',params);
 					console.log(currentBtn);

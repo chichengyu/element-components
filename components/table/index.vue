@@ -56,7 +56,7 @@
                             </el-tooltip>
                         </div>
                         <div v-else style="display:inline-block;">
-                            <div v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
+                            <div v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click.stop="handlePreview(scope.row[col.prop])">
                                 <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
                             </div>
                             <div v-else-if="col.slot">
@@ -85,18 +85,19 @@
                                 :icon="item.icon||''"
                                 :plain="item.plain||false"
                                 :style="item.style&&item.style(scope,item)"
-                                @click="item.click&&item.click(scope,item)"
+                                @click.stop="item.click&&item.click(scope,item)"
                                 :size="item.size||'mini'">
                                 {{ item.title }}
                             </el-button>
                             <el-popover v-else
                                 :ref="`popover${scope.$index}`"
+                                :trigger="item.trigger||'click'"
                                 placement="top-end"
                                 width="120" style="margin-left: 10px">
                                 <div style="text-align: center; margin: 0">
                                     <h4 style="margin-top:.6rem;"><i class="el-icon-warning" style="margin-right:6px;color:#ff9900;"></i>{{ item.header||'你确定删除吗？'}}</h4>
-                                    <el-button type="text" size="mini" style="padding:4px 7px" @click="handleCancel(item,scope)">取消</el-button>
-                                    <el-button type="primary" size="mini" style="padding:4px 7px" @click="handleOk(item,scope)">确定</el-button>
+                                    <el-button type="text" size="mini" style="padding:4px 7px" @click.stop="handleCancel(item,scope)">取消</el-button>
+                                    <el-button type="primary" size="mini" style="padding:4px 7px" @click.stop="handleOk(item,scope)">确定</el-button>
                                 </div>
                                 <el-button :type="item.type" :plain="item.plain||false" :icon="item.icon||''" :style="item.style&&item.style(scope,item)" :size="item.size||'mini'" slot="reference">{{ item.title||'删除' }}</el-button>
                             </el-popover>
