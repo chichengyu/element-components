@@ -1,5 +1,5 @@
 <template>
-    <div class="table" style="width:100%;margin-top:5px">
+    <div class="treeTable" style="width:100%;margin-top:5px">
         <el-table ref="treeTable" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
             :border="data.border"
             v-loading="data.loading"
@@ -153,8 +153,8 @@ export default {
             scope._self.$el.click();
             currentBtn.click.cancel && currentBtn.click.cancel(scope,currentBtn);
         },
-        handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
-        handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
+        handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.treeTable);},
+        handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.treeTable);},
         hanldeSizeChange:function(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
         handlePreview:function(src){
             this.previewUrl = src;
@@ -198,40 +198,40 @@ export default {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.table >>> .switchStyle .el-switch__label {
+.treeTable >>> .switchStyle .el-switch__label {
     position: absolute;
     display: none;
     color: #fff;
     width: 100%;
 }
-.table >>> .switchStyle .el-switch__label--left {
+.treeTable >>> .switchStyle .el-switch__label--left {
     width: 100%;
     z-index: 1;
     left: 22px;
 }
-.table >>> .switchStyle .el-switch__label--right {
+.treeTable >>> .switchStyle .el-switch__label--right {
     width: 100%;
     z-index: 1;
     margin-left: 8px;
 }
-.table >>> .switchStyle .el-switch__label.is-active {
+.treeTable >>> .switchStyle .el-switch__label.is-active {
     display: block;
     width: 100%;
 }
-.table >>> .switchStyle.el-switch .el-switch__core, .el-switch .el-switch__label {
+.treeTable >>> .switchStyle.el-switch .el-switch__core, .el-switch .el-switch__label {
     /*width: 50px !important;*/
     padding: 0 28px !important;
     height: 22px !important;
     border-radius: 12px;
 }
-.table >>> .switchStyle.el-switch{
+.treeTable >>> .switchStyle.el-switch{
     height: 22px !important;
 }
-.table >>> .el-switch__core:after{
+.treeTable >>> .el-switch__core:after{
     width: 18px;
     height: 18px;
 }
-.table >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
+.treeTable >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
     margin-left: -19px !important;
 }
 </style>
