@@ -58,27 +58,27 @@
                 <template v-if="col.tooltip">
                     <el-tooltip placement="top">
                         <template v-if="col.render">
-                            <div class="table-col-render-content-style" slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
+                            <div class="treetable-col-render-content-style" slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
                             <div :style="Object.assign({width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'},col.render(scope,col)[1]||{})">{{ col.render(scope,col)[0] }}</div>
                         </template>
                         <template v-else>
-                            <div class="table-col-slot-content-style" slot="content">{{ scope.row[col.prop] }}</div>
+                            <div class="treetable-col-slot-content-style" slot="content">{{ scope.row[col.prop] }}</div>
                             <div :style="{width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'}">{{ scope.row[col.prop] }}</div>
                         </template>
                     </el-tooltip>
                 </template>
                 <template v-else>
-                    <div class="table-col-isPreview-style" v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click.stop="handlePreview(scope.row[col.prop])">
+                    <div class="treetable-col-isPreview-style" v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click.stop="handlePreview(scope.row[col.prop])">
                         <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
                     </div>
-                    <div class="table-col-slot-style" v-else-if="col.slot">
+                    <div class="treetable-col-slot-style" v-else-if="col.slot">
                         <slot :name="col.slot" v-bind:scope="scope"></slot>
                     </div>
-                    <div class="table-col-render-style" v-else-if="col.render">
+                    <div class="treetable-col-render-style" v-else-if="col.render">
                         <div v-if="col.render(scope,col).length==2" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
                         <div v-else>{{ col.render(scope,col)[0] }}</div>
                     </div>
-                    <div class="table-col-default-style" v-else :style="col.style&&col.style(scope,col)">{{ scope.row[col.prop] }}</div>
+                    <div class="treetable-col-default-style" v-else :style="col.style&&col.style(scope,col)">{{ scope.row[col.prop] }}</div>
                 </template>
             </template>
           </el-table-column>
@@ -235,7 +235,7 @@ export default {
 .treeTable >>> .switchStyle.el-switch.is-checked .el-switch__core:after{
     margin-left: -19px !important;
 }
-.treeTable >>> .table-col-default-style{
+.treeTable >>> .treetable-col-default-style{
     display: inline-block;
 }
 </style>
