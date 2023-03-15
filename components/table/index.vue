@@ -1,6 +1,6 @@
 <template>
     <div class="table" style="width:100%;margin-top:5px">
-        <el-table v-if="!data.tree" ref="table" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
+        <el-table ref="table" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
             :border="data.border"
             v-loading="data.loading"
             :element-loading-text="data.loadingText||'Loading'"
