@@ -295,7 +295,7 @@ tableData: {
 }
 ```
 #### treetable
-树形表格比表格 table 差不多，列扩展也是一样，多了一个属性``` tree:true ```，```treeProps``` 为树形表格子级 `key` ,默认 `children`，可注释
+树形表格比表格 table 差不多，列扩展也是一样，多了一个属性``` tree:true ```与``` treeProps ```(树形时2个属性必须设置)，```treeProps``` 为树形表格子级 `key` ,默认 `children`，
 ```
 <component-tree-table :data="billData"/>
 
@@ -303,7 +303,7 @@ tableData: {
 # 数据结构
 tableData: {
 	tree:true,// true 为树形表格
-	treeProps:{ hasChildren: 'hasChildren', children: 'children' },// treeKey 为树形表格子级 key ,默认 children，可注释
+	treeProps:{ hasChildren: 'hasChildren', children: 'children' },// treeKey 为树形表格子级 key ,默认 children
 	defaultExpandAll:false,// 是否默认展开所有节点,默认false
 	indent:16,// 树形缩进，默认16,不需要可去掉
 	rowKey:function (row) {// 树形结构，必须设置
