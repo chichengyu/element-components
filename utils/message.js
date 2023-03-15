@@ -44,7 +44,6 @@ export var alert = function (title,success,error,options,content) {
     ElementUI.MessageBox.alert(content, title, Object.assign({
         confirmButtonText: '确定',
         type: 'warning',
-        center: true,
     },options)).then(function(val){
         return success && success(val);
     }).catch(function(val){
@@ -58,7 +57,6 @@ export var prompt = function (title,success,error,options,content) {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-        center: true,
     },options)).then(function(val){
         return success && success(val);
     }).catch(function(val){
@@ -72,7 +70,6 @@ export var confirm = function (title,success,error,options,content) {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
-        center: true,
     },options)).then(function(val){
         return success && success(val);
     }).catch(function(val){

@@ -1,6 +1,6 @@
 <template>
     <div class="table">
-        <component-table v-if="tableData.tableData.length>0" :data="tableData">
+        <component-tree-table v-if="tableData.tableData.length>0" :data="tableData">
 
             <!-- 列，abc，col 随意取的，需要在 tableLabel 中定义 slot:'abc'、slot:'col'，scope为当前行参数 -->
             <!-- ***** 注意：slot的命名必须不能相同 ***** -->
@@ -15,7 +15,7 @@
             <template v-slot:button="{scope}">
                 <el-button type="warning" size="mini" @click="handleClick(scope)">按钮 </el-button>
             </template>
-        </component-table>
+        </component-tree-table>
     </div>
 </template>
 

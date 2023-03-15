@@ -5,6 +5,7 @@ import dialog from './components/dialog'
 import popover from './components/popover'
 import preview from './components/preview'
 import upload from './components/upload'
+import treeTable from './components/treeTable'
 import fileUpload from './components/fileUpload'
 import wangEditor from './components/wangEditor'
 import validate from './utils/validate.js'
@@ -31,6 +32,7 @@ export default {
         Vue.component('ComponentPopover',popover);
         Vue.component('ComponentPreview',preview);
         Vue.component('ComponentUpload',upload);
+        Vue.component('ComponentTreeTable',treeTable);
         Vue.component('ComponentFileUpload',fileUpload);
         Vue.component('ComponentWangEditor',wangEditor);
     },

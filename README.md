@@ -32,6 +32,7 @@ Vue.use(ElementComponent);
 <component-popover></component-popover>
 <component-preview></component-preview>
 <component-upload></component-upload>
+<component-tree-table></component-tree-table>
 <component-file-upload></component-file-upload>
 <component-wang-editor></component-wang-editor>
 ```
@@ -272,11 +273,32 @@ tableData: {
 	     console.log('选择项改变时的值',params);
 	     console.log('表格对象',tableObject);
 	},
+	headerClick(dom,row,index,e){// 单击某一列表头事件,不需要可去掉
+         console.log('单击表头');
+    },
+    headerContextmenu(dom,row, column, event){// 鼠标右键点击某一列表头触发事件,不需要可去掉
+         console.log('鼠标右键表头');
+    },
+    rowClick(dom,row,index,e){// 单击行事件,不需要可去掉
+	     // dom.toggleRowExpansion(row);// 点击整行展开树形节点
+	     console.log('单击');
+    },
+    rowDblclick(dom,row,index,e){// 双击行事件,不需要可去掉
+	     console.log('双击');
+    },
+    expandChange(dom,row,expanded){// 树形展开事件,不需要可去掉
+	     console.log('222',expanded);
+    },
+    rowContextmenu(dom,row, column, event){// 鼠标右键点击触发事件,不需要可去掉
+	     console.log(666);
+    },
 }
 ```
 #### treetable
-树形表格比表格 table 多了一个属性``` tree:true ```与列属性 ``` hasChildren:true ```，```treeKey``` 为树形表格子级 `key` ,默认 `children`，可注释
+树形表格比表格 table 差不多，列扩展也是一样，多了一个属性``` tree:true ```，```treeProps``` 为树形表格子级 `key` ,默认 `children`，可注释
 ```
+<component-tree-table :data="billData"/>
+
 # field
 {prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
 
@@ -284,8 +306,33 @@ tableData: {
 # 数据结构
 tableData: {
 	tree:true,// true 为树形表格
-	treeKey:'children',// treeKey 为树形表格子级 key ,默认 children，可注释
-	// ......
+	treeProps:{ hasChildren: 'hasChildren', children: 'children' },// treeKey 为树形表格子级 key ,默认 children，可注释
+	defaultExpandAll:false,// 是否默认展开所有节点,默认false
+	indent:16,// 树形缩进，默认16,不需要可去掉
+	rowKey:function (row) {// 树形结构，必须设置
+	  return row.id;
+	},
+	expandRowKeys:[88,122],// 展开行的 keys 数组,不需要可去掉
+	indent:16,// 树形缩进，默认16,不需要可去掉
+	rowClick(dom,row,index,e){// 单击行事件,不需要可去掉
+	  // dom.toggleRowExpansion(row);// 点击整行展开树形节点
+	},
+    rowDblclick(dom,row,index,e){// 双击行事件,不需要可去掉
+	     console.log('双击');
+    },
+	expandChange(dom,row,expanded){// 树形表格展开事件,不需要可去掉
+	  console.log('222',expanded);
+	},
+	rowContextmenu(dom,row, column, event){// 鼠标右键点击触发事件,不需要可去掉
+	  console.log(666);
+	},
+	headerClick(dom,row,index,e){// 单击某一列表头事件,不需要可去掉
+         console.log('单击表头');
+    },
+    headerContextmenu(dom,row, column, event){// 鼠标右键点击某一列表头触发事件,不需要可去掉
+         console.log('鼠标右键表头');
+    },
+	// ...... 其他属性跟 table 表格一致
 }
 ```
 数据结构多了一个children,

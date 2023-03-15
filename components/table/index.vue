@@ -1,13 +1,20 @@
 <template>
     <div class="table" style="width:100%;margin-top:5px">
-        <el-table ref="table" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
+        <el-table v-if="!data.tree" ref="table" :stripe="data.stripe" :show-header="data.showHeader" :max-height="data.maxHeight" :size="data.size" style="width:100%"
             :border="data.border"
             v-loading="data.loading"
             :element-loading-text="data.loadingText||'Loading'"
             :element-loading-spinner="data.loadingIcon||'el-icon-loading'"
             :empty-text="data.table_msg_empty"
+            :row-key="data.rowKey"
             :data="data.tableData"
             :default-sort="data.defaultSort"
+            @row-click="rowClick"
+            @header-click="headerClick"
+            @row-dblclick="rowDblclick"
+            @expand-change="expandChange"
+            @row-contextmenu="rowContextmenu"
+            @header-contextmenu="headerContextmenu"
             @selection-change="handleSelectionChange"
             @sort-change="handleSort">
             <template v-for="(col,key) in data.tableLabel">
@@ -36,28 +43,7 @@
                            :inactive-text="col.inactiveText||'禁用'"
                            @change="col.change && col.change(scope)">
                         </el-switch>
-                        <div v-else-if="data.tree && col.hasChildren && scope.row[data.treeKey] && scope.row[data.treeKey].length > 0" @click="treeClick(scope.row,scope.$index,data.treeKey)">
-                            <template v-if="col.render">
-                                <div :style="Object.assign({marginLeft:(scope.row.__xgrade-0.3)+'em',cursor:'pointer'},col.render(scope,col)[1]||{})">
-                                    <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                    <i class="el-icon-arrow-right" v-else></i>
-                                    <span>{{ col.render(scope,col)[0] }}</span>
-                                </div>
-                            </template>
-                            <template v-else>
-                                <div :style="{marginLeft:(scope.row.__xgrade-0.3)+'em',cursor:'pointer'}">
-                                    <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                    <i class="el-icon-arrow-right" v-else></i>
-                                    <span>{{ scope.row[col.prop] }}</span>
-                                </div>
-                            </template>
-                            <!--<div :style="Object.assign({marginLeft:(scope.row.xgrade-0.3)+'em',cursor:'pointer'},col.style&&col.style(scope,col)||{})">
-                                <i class="el-icon-arrow-down" v-if="scope.row.open"></i>
-                                <i class="el-icon-arrow-right" v-else></i>
-                                <span>{{ col.render?col.render(scope):scope.row[col.prop] }}</span>
-                            </div>-->
-                        </div>
-                        <div v-else-if="col.tooltip">
+                        <div v-if="col.tooltip" style="display:inline-block;">
                             <el-tooltip placement="top">
                                 <template v-if="col.render">
                                     <div slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
@@ -69,12 +55,8 @@
                                 </template>
                             </el-tooltip>
                         </div>
-                        <div v-else>
-                            <div v-if="scope.row.__xgrade>0&&col.hasChildren">
-                                <div v-if="col.render" :style="Object.assign({marginLeft:(scope.row.__xgrade+0.6)+'em'},col.render(scope)[1]||{})">{{ col.render(scope)[0] }}</div>
-                                <div v-else :style="{marginLeft:(scope.row.__xgrade+0.6)+'em'}">{{ scope.row[col.prop] }}</div>
-                            </div>
-                            <div v-else-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
+                        <div v-else style="display:inline-block;">
+                            <div v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click="handlePreview(scope.row[col.prop])">
                                 <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">
                             </div>
                             <div v-else-if="col.slot">
@@ -137,21 +119,13 @@ export default {
             required:true
         }
     },
-    data:function(){return {count:0,visibled:false,previewUrl:''}},
+    data:function(){return {visibled:false,previewUrl:''}},
     watch:{
         data:{
             immediate:true,
             deep:true,
-            handler:function(val){(this.count === 1) && util.treeTableXcode(val.tableData);}
+            handler:function(val){}
         }
-    },
-    created:function(){
-        if (this.data.tree){
-            !this.data.treeKey && (this.data.treeKey = 'children');
-            util.treeTableXcode(this.data.tableData,null,null,this.data.treeKey);
-            this.count = 1;
-        }
-        //!this.tree && util.treeTableXcode(this.data.tableData);
     },
     methods: {
         handleOk:function(currentBtn,scope){
@@ -162,40 +136,6 @@ export default {
             scope._self.$el.click();
             currentBtn.click.cancel && currentBtn.click.cancel(scope,currentBtn);
         },
-        treeClick:function(item,index,treeKey){
-            if(item.open){
-                this.collapse(item,index,treeKey);
-            }else{
-                this.expand(item,index,treeKey);
-            }
-        },
-        expand:function(item,index,treeKey){
-            if(!item[treeKey]){
-                return index;
-            }
-            util.treeTableXcode(item[treeKey],item.__xcode+"-",item.__xgrade+1,treeKey);
-            /*!item.xgrade && this.data.tableData.some((item,index) => {
-                if (item.xcode.includes('-')) {
-                    index = item.xcode.substr(0,1);
-                    this.collapse(this.data.tableData[index],index);
-                    return true;
-                }
-            });*/
-            for(var i=0,leng=item[treeKey].length;i<leng;i++){
-                var child = item[treeKey][i];
-                this.data.tableData.splice(++index,0,child);
-                if(child[treeKey] && child[treeKey].length > 0 && child.open){
-                    index = this.expand(child,index,treeKey);
-                }
-            }
-            item.open = true;
-            return index;
-        },
-        collapse:function(item,index,treeKey){
-            if(!item[treeKey])return index;
-            item.open = false;
-            this.data.tableData.splice(Number(index)+1,util.size(item[treeKey],treeKey));
-        },
         handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
         handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
         hanldeSizeChange:function(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
@@ -203,34 +143,31 @@ export default {
             this.previewUrl = src;
             this.visibled = true;
         },
-    },
-}
-var util = {};
-util.treeTableXcode = function(data,xcode,xgrade,treeKey){
-    xcode = xcode || "";
-    xgrade = xgrade || 0;
-    for(var i=0;i<data.length;i++){
-        var item = data[i];
-        if (item.__xcode && !item.__xcode.includes('-')){
-            break;
-        }else{
-            item.__xcode = xcode + i;
-            item.__xgrade = xgrade;
-            if(item[treeKey] && item[treeKey].length > 0){
-                util.treeTableXcode(item[treeKey],item.__xcode+"-",xgrade+1,treeKey);
+        expandChange(row,expandedRows){
+            this.data.expandChange && this.data.expandChange(this.$refs.treeTable,row,expandedRows);
+        },
+        headerClick(row,index,e){
+            if (this.data.headerClick){
+                this.data.headerClick(this.$refs.treeTable,row,index,e);
             }
+        },
+        rowClick(row,index,e){
+            if (this.data.rowClick){
+                this.data.rowClick(this.$refs.treeTable,row,index,e);
+            }
+        },
+        rowDblclick(row,index,e){
+            if (this.data.rowDblclick){
+                this.data.rowDblclick(this.$refs.treeTable,row,index,e);
+            }
+        },
+        rowContextmenu(row, column, event){
+            this.data.rowContextmenu && this.data.rowContextmenu(this.$refs.treeTable,row, column, event);
+        },
+        headerContextmenu(row, column, event){
+            this.data.headerContextmenu && this.data.headerContextmenu(this.$refs.treeTable,row, column, event);
         }
-    }
-};
-util.size = function (data,treeKey) {
-    var len = 0;
-    if(data.length)len = data.length;
-    for(var i=0;i<data.length;i++){
-        if (data[i].open && data[i][treeKey]){
-            len += util.size(data[i][treeKey],treeKey);
-        }
-    }
-    return len;
+    },
 }
 </script>
 
