@@ -299,9 +299,6 @@ tableData: {
 ```
 <component-tree-table :data="billData"/>
 
-# field
-{prop:'name',title:'名称',width:100,hasChildren:true,align:'left',render:(params) => {return [params.row.name,{color:'red'}]}},
-
 
 # 数据结构
 tableData: {
@@ -313,7 +310,6 @@ tableData: {
 	  return row.id;
 	},
 	expandRowKeys:[88,122],// 展开行的 keys 数组,不需要可去掉
-	indent:16,// 树形缩进，默认16,不需要可去掉
 	rowClick(dom,row,index,e){// 单击行事件,不需要可去掉
 	  // dom.toggleRowExpansion(row);// 点击整行展开树形节点
 	},
