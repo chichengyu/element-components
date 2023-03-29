@@ -131,21 +131,39 @@ export default {
     methods: {
         handleOk:function(currentBtn,scope){
             scope._self.$el.click();
-            currentBtn.click.ok && currentBtn.click.ok(scope,currentBtn);
+            if(currentBtn.click.ok){
+                currentBtn.click.ok(scope,currentBtn);
+            }
         },
         handleCancel:function(currentBtn,scope){
             scope._self.$el.click();
-            currentBtn.click.cancel && currentBtn.click.cancel(scope,currentBtn);
+            if (currentBtn.click.cancel){
+                currentBtn.click.cancel(scope,currentBtn);
+            }
         },
-        handleSelectionChange:function(params){this.data.selectionChange && this.data.selectionChange(params,this.$refs.table);},
-        handleSort:function(params){this.data.sortChange && this.data.sortChange(params,this.$refs.table);},
-        hanldeSizeChange:function(val){this.data.page.sizeChange && this.data.page.sizeChange(val);},
+        handleSelectionChange:function(params){
+            if (this.data.selectionChange){
+                this.data.selectionChange(params,this.$refs.table);
+            }
+        },
+        handleSort:function(params){
+            if (this.data.sortChange){
+                this.data.sortChange(params,this.$refs.table);
+            }
+        },
+        hanldeSizeChange:function(val){
+            if (this.data.page.sizeChange){
+                this.data.page.sizeChange(val);
+            }
+        },
         handlePreview:function(src){
             this.previewUrl = src;
             this.visibled = true;
         },
         expandChange(row,expandedRows){
-            this.data.expandChange && this.data.expandChange(this.$refs.table,row,expandedRows);
+            if (this.data.expandChange){
+              this.data.expandChange(this.$refs.table,row,expandedRows);
+            }
         },
         headerClick(row,index,e){
             if (this.data.headerClick){
@@ -163,10 +181,14 @@ export default {
             }
         },
         rowContextmenu(row, column, event){
-            this.data.rowContextmenu && this.data.rowContextmenu(this.$refs.table,row, column, event);
+            if (this.data.rowContextmenu){
+                this.data.rowContextmenu(this.$refs.table,row, column, event);
+            }
         },
         headerContextmenu(row, column, event){
-            this.data.headerContextmenu && this.data.headerContextmenu(this.$refs.table,row, column, event);
+            if (this.data.headerContextmenu){
+                this.data.headerContextmenu(this.$refs.table,row, column, event);
+            }
         }
     },
 }

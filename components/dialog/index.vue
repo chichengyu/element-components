@@ -63,14 +63,16 @@ export default {
         },
         handleDialog:function(key,type){
             if (type==1){
-              this.beforeCancel(this.$refs.dialog);
-              this.$emit('cancel',this.$refs.dialog);
+                this.beforeCancel(this.$refs.dialog);
+                this.$emit('cancel',this.$refs.dialog);
             }
             if (type==2){
-              this.beforeOk(this.$refs.dialog);
-              this.$emit('ok',this.$refs.dialog);
+                this.beforeOk(this.$refs.dialog);
+                this.$emit('ok',this.$refs.dialog);
             }
-            this.$parent.hasOwnProperty(key) && this.$parent[key](this.$refs.dialog);
+            if(this.$parent.hasOwnProperty(key)){
+                this.$parent[key](this.$refs.dialog);
+            }
             this.$emit('update:visible',false);
         }
     }

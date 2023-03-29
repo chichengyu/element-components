@@ -121,7 +121,9 @@ export default {
     methods: {
         handleRemove:function(file,e) {
             var target = e.currentTarget.parentNode.parentNode.parentNode,index = null;
-            target.parentNode.children && (index = Array.prototype.indexOf.call(target.parentNode.children,target));
+            if (target.parentNode.children){
+                index = Array.prototype.indexOf.call(target.parentNode.children,target);
+            }
             target.parentNode.removeChild(target);
             this.$emit('remove',file,this.$refs.upload,this.fileImageList,this.params,index);
         },
@@ -131,7 +133,9 @@ export default {
         },
         handleBefore:function(file){
             var parent = this.$refs.upload.$children[0].$el;
-            !this.more && parent.childElementCount>0 && parent.removeChild(parent.children[0]);
+            if (!this.more && parent.childElementCount>0){
+                parent.removeChild(parent.children[0]);
+            }
             return this.$emit('before',file,this.$refs.upload,this.params);
         },
         handleSuccess:function(response, file, fileList){
