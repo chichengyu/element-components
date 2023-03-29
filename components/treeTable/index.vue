@@ -177,33 +177,33 @@ export default {
             this.previewUrl = src;
             this.visibled = true;
         },
-        expandChange(row,expandedRows){
+        expandChange:function(row,expandedRows){
             if (this.data.expandChange){
                 this.data.expandChange(this.$refs.treeTable,row,expandedRows);
             }
         },
-        headerClick(row,index,e){
+        headerClick:function(row,index,e){
             if (this.data.headerClick){
                 this.data.headerClick(this.$refs.treeTable,row,index,e);
             }
         },
-        rowClick(row,index,e){
+        rowClick:function(row,index,e){
             if (this.data.rowClick){
                 this.data.rowClick(this.$refs.treeTable,row,index,e);
             }
             // this.$refs.treeTable.toggleRowExpansion(row);
         },
-        rowDblclick(row,index,e){
+        rowDblclick:function(row,index,e){
             if (this.data.rowDblclick){
                 this.data.rowDblclick(this.$refs.treeTable,row,index,e);
             }
         },
-        rowContextmenu(row, column, event){
+        rowContextmenu:function(row, column, event){
             if (this.data.rowContextmenu){
                 this.data.rowContextmenu(this.$refs.treeTable,row, column, event);
             }
         },
-        headerContextmenu(row, column, event){
+        headerContextmenu:function(row, column, event){
             if (this.data.headerContextmenu){
                 this.data.headerContextmenu(this.$refs.treeTable,row, column, event);
             }

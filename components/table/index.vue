@@ -160,32 +160,32 @@ export default {
             this.previewUrl = src;
             this.visibled = true;
         },
-        expandChange(row,expandedRows){
+        expandChange:function(row,expandedRows){
             if (this.data.expandChange){
               this.data.expandChange(this.$refs.table,row,expandedRows);
             }
         },
-        headerClick(row,index,e){
+        headerClick:function(row,index,e){
             if (this.data.headerClick){
                 this.data.headerClick(this.$refs.table,row,index,e);
             }
         },
-        rowClick(row,index,e){
+        rowClick:function(row,index,e){
             if (this.data.rowClick){
                 this.data.rowClick(this.$refs.table,row,index,e);
             }
         },
-        rowDblclick(row,index,e){
+        rowDblclick:function(row,index,e){
             if (this.data.rowDblclick){
                 this.data.rowDblclick(this.$refs.table,row,index,e);
             }
         },
-        rowContextmenu(row, column, event){
+        rowContextmenu:function(row, column, event){
             if (this.data.rowContextmenu){
                 this.data.rowContextmenu(this.$refs.table,row, column, event);
             }
         },
-        headerContextmenu(row, column, event){
+        headerContextmenu:function(row, column, event){
             if (this.data.headerContextmenu){
                 this.data.headerContextmenu(this.$refs.table,row, column, event);
             }
