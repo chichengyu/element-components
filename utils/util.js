@@ -8,7 +8,9 @@ export default {
         if (file) {
             var fileReader = new FileReader();
             fileReader.readAsDataURL(file);
-            fileReader.onload = (e) => callback && callback(e);
+            fileReader.onload = function(e){
+				callback && callback(e);
+			}
         }
     },
     /**
@@ -160,8 +162,8 @@ export default {
     exportExcel:function(axios,fileName,options,isCustom){
         //options.responseType = "blob";// 表明返回服务器返回的数据类型
         options.headers && !options.headers.ContentType && (options.headers.ContentType = "application/json;charset=UTF-8");
-        return new Promise((resolve,reject) => {
-            axios(Object.assign({responseType:"blob"},options)).then((response) => {
+        return new Promise(function(resolve,reject){
+            axios(Object.assign({responseType:"blob"},options)).then(function(response){
                 resolve(response.data);
                 if (isCustom){
                     return;
@@ -178,10 +180,10 @@ export default {
                     //释放内存
                     window.URL.revokeObjectURL(link.href);
                 }
-            }, (err) => {
+            }, function(err){
                 console.log('%c ! Export Error', 'background:#000;color:#bada55', err);
                 reject(err);
-            }).catch(err => {
+            }).catch(function(err){
                 console.log('%c ! Export Catch', 'background:#000;color:#bada55', err);
                 reject(err);
             });
