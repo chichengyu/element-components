@@ -295,7 +295,7 @@ tableData: {
 }
 ```
 #### treetable
-树形表格比表格 table 差不多，列扩展也是一样，多了一个属性``` tree:true ```与``` treeProps ```(树形时2个属性必须设置)，```treeProps``` 为树形表格子级 `key` ,默认 `children`，
+树形表格比表格 table 差不多，列扩展也是一样，多了一个属性``` tree:true ```与``` treeProps ``` 与 ``` rowKey ```(树形时3个属性必须设置,否则无效)，```treeProps``` 为树形表格子级 `key` ,默认 `children`，
 ```
 <component-tree-table :data="billData"/>
 
@@ -656,6 +656,7 @@ form:{
 	<component-dialog
 	   :title="'Dialog弹窗'"
 	   :width="50"
+	   :header="true" // 头部自定义 
 	   :footer="false" // 关闭底部
 	   :footerBtnSize="'mini'" // 底部按钮 size ,默认为 ''	   
 	   :closeOnClickModal="false" // 是否点击周围关闭弹窗
@@ -666,6 +667,9 @@ form:{
 	   :beforeOk='handleBeforeOk'	   
 	   @cancel="handleCancel"
 	   @ok="handleOk">
+	   <div slot="header">
+			<span style="font-size:14px">Dialog弹窗,文字自定义</span>
+	   </div>
 		<div slot="dialog">
 			<span>这是 Dialog 弹窗封装组件</span>
 			<component-upload :action="'#'" :previewImages="url" :appendToBody="true"></component-upload>

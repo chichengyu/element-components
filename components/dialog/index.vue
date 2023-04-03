@@ -1,5 +1,5 @@
 <template>
-    <el-dialog ref="dialog"
+    <el-dialog ref="dialog" :modal="modal"
         :title="title"
         :visible.sync="$attrs.visible"
         :width="'number'==typeof width?width+'%':width"
@@ -7,6 +7,9 @@
         :append-to-body="appendToBody"
         :before-close="handleBeforeClose"
         :destroy-on-close="true">
+        <div v-if="header" slot="title" class="dialog-header-title">
+          <slot name="header"></slot>
+        </div>
         <slot name="dialog"></slot>
         <div v-if="footer" slot="footer" class="dialog-footer">
             <el-button :size="footerBtnSize" @click="handleDialog('cancel',1)">取 消</el-button>
@@ -25,6 +28,14 @@ export default {
         width:{
             type:[Number,String],
             default:30
+        },
+        modal:{
+            type:Boolean,
+            default: true
+        },
+        header:{
+            type:Boolean,
+            default: false
         },
         footer:{
             type:Boolean,
