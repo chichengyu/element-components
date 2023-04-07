@@ -6,7 +6,8 @@
             :element-loading-text="data.loadingText||'Loading'"
             :element-loading-spinner="data.loadingIcon||'el-icon-loading'"
             :empty-text="data.table_msg_empty"
-            :row-key="data.rowKey"
+            :row-key="rowKey"
+            :expand-row-keys="data.expandRowKeys||[]"
             :data="data.tableData"
             :default-sort="data.defaultSort"
             @row-click="rowClick"
@@ -129,6 +130,12 @@ export default {
         }
     },
     methods: {
+        rowKey:function(row){
+          if (this.data.rowKey){
+            return this.data.rowKey(row);
+          }
+          return null;
+        },
         handleOk:function(currentBtn,scope){
             scope._self.$el.click();
             if(currentBtn.click.ok){
