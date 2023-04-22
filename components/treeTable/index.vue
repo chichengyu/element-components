@@ -33,6 +33,7 @@
                  :min-width="col.minWidth"
                  :sortable="col.sort"
                  :formatter="col.formatter"
+                 :show-overflow-tooltip="col.tooltip"
                  :align="col.align||'left'">
                 <template slot-scope="scope">
                     <el-switch class="switchStyle" v-if="col.isSwitch"
@@ -55,7 +56,7 @@
                     <span>{{ scope.row[col.prop] }}</span>
                 </template>
                 </div>-->
-                <template v-if="col.tooltip">
+                <!--<template v-if="col.tooltip">
                     <el-tooltip placement="top">
                         <template v-if="col.render">
                             <div class="treetable-col-render-content-style" slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
@@ -66,7 +67,7 @@
                             <div :style="{width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'}">{{ scope.row[col.prop] }}</div>
                         </template>
                     </el-tooltip>
-                </template>
+                </template>-->
                 <template v-else>
                     <div class="treetable-col-isPreview-style" v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click.stop="handlePreview(scope.row[col.prop])">
                         <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">

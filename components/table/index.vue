@@ -30,7 +30,7 @@
                      :min-width="col.minWidth"
                      :sortable="col.sort"
                      :formatter="col.formatter"
-                     :align="col.align||'left'">
+                     :align="col.align||'left'" :show-overflow-tooltip="col.tooltip">
                     <template slot-scope="scope">
                         <el-switch class="switchStyle" v-if="col.isSwitch"
                            :style="col.style&&col.style(scope,col)"
@@ -44,7 +44,7 @@
                            :inactive-text="col.inactiveText||'禁用'"
                            @change="col.change && col.change(scope)">
                         </el-switch>
-                        <template v-if="col.tooltip">
+                        <!--<template v-if="col.tooltip">
                             <el-tooltip placement="top">
                                 <template v-if="col.render">
                                     <div class="table-col-render-content-style" slot="content" :style="col.render(scope,col)[1]">{{ col.render(scope,col)[0] }}</div>
@@ -55,7 +55,7 @@
                                     <div :style="{width: '100%',overflow: 'hidden','white-space':'nowrap','text-overflow':'ellipsis'}">{{ scope.row[col.prop] }}</div>
                                 </template>
                             </el-tooltip>
-                        </template>
+                        </template>-->
                         <template v-else>
                             <div class="table-col-isPreview-style" v-if="col.isPreview" :style="col.style&&col.style(scope,col)" @click.stop="handlePreview(scope.row[col.prop])">
                                 <img :src="scope.row[col.prop]" width="100%" height="100%" style="cursor:pointer">

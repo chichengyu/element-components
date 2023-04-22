@@ -263,33 +263,33 @@ tableData: {
 	    }
         },
 	// 排序
-	sortChange:(obj,tableObject) {
+	sortChange:(obj,tableObject)=> {
 	     console.log(10);
 	     console.log(obj);
 	     console.log('当前表格对象',tableObject);
 	},
 	// 表格实现多选时的 change 事件
-	selectionChange:(params,tableObject){
+	selectionChange:(params,tableObject)=>{
 	     console.log('选择项改变时的值',params);
 	     console.log('表格对象',tableObject);
 	},
-	headerClick(dom,row,index,e){// 单击某一列表头事件,不需要可去掉
+	headerClick:(dom,row,index,e)=>{// 单击某一列表头事件,不需要可去掉
          console.log('单击表头');
     },
-    headerContextmenu(dom,row, column, event){// 鼠标右键点击某一列表头触发事件,不需要可去掉
+    headerContextmenu:(dom,row, column, event)=>{// 鼠标右键点击某一列表头触发事件,不需要可去掉
          console.log('鼠标右键表头');
     },
-    rowClick(dom,row,index,e){// 单击行事件,不需要可去掉
+    rowClick:(dom,row,index,e)=>{// 单击行事件,不需要可去掉
 	     // dom.toggleRowExpansion(row);// 点击整行展开树形节点
 	     console.log('单击');
     },
-    rowDblclick(dom,row,index,e){// 双击行事件,不需要可去掉
+    rowDblclick:(dom,row,index,e)=>{// 双击行事件,不需要可去掉
 	     console.log('双击');
     },
-    expandChange(dom,row,expanded){// 树形展开事件,不需要可去掉
+    expandChange:(dom,row,expanded)=>{// 树形展开事件,不需要可去掉
 	     console.log('222',expanded);
     },
-    rowContextmenu(dom,row, column, event){// 鼠标右键点击触发事件,不需要可去掉
+    rowContextmenu:(dom,row, column, event)=>{// 鼠标右键点击触发事件,不需要可去掉
 	     console.log(666);
     },
 }
@@ -653,7 +653,7 @@ form:{
 	<el-button type="text" @click="dialogVisible = true">点击打开 Dialog</el-button>
 	<!-- appendToBody 是否嵌套 默认 false ,嵌套的 Dialog 必须指定该属性并赋值为 true
 	width：可以为 number 50,20..., string '500px' ，:footer="false"　底部可不要且自己自定义-->
-	<component-dialog
+	<component-dialog :modal="true" // 是否显示弹出背景遮罩
 	   :title="'Dialog弹窗'"
 	   :width="50"
 	   :header="true" // 头部自定义 
