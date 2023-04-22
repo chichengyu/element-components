@@ -30,7 +30,8 @@
                      :min-width="col.minWidth"
                      :sortable="col.sort"
                      :formatter="col.formatter"
-                     :align="col.align||'left'" :show-overflow-tooltip="col.tooltip">
+                     :show-overflow-tooltip="col.tooltip"
+                     :align="col.align||'left'">
                     <template slot-scope="scope">
                         <el-switch class="switchStyle" v-if="col.isSwitch"
                            :style="col.style&&col.style(scope,col)"
