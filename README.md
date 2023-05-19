@@ -99,6 +99,10 @@ this.confirm(title,() => {
 },() => {
 	console.log('取消...');
 },options={},content='')
+# goLoading 加载遮罩
+let loading = this.goLoading(message,dom,icon,background,options);
+// 关闭加载中
+loading.close();
 ```
 #### util
 ```
@@ -123,6 +127,7 @@ this.util.clipboard(document.getElementById('linkText'),dom => this.success('复
 this.util.createFileBlobReadUrl(file,result => console.log(result));
 
 # cache 设置/获取/删除缓存(localStorage)
+this.util.cache(key,val,ttl);// 设置带过期时间的缓存
 this.util.cache(key,val);// 设置
 this.util.cache(key);// 获取
 this.util.cacheRemove(key);// 移除

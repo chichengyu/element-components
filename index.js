@@ -10,7 +10,7 @@ import fileUpload from './components/fileUpload'
 import wangEditor from './components/wangEditor'
 import validate from './utils/validate.js'
 import util from './utils/util.js'
-import { message, warning, success, error, alert, prompt, confirm} from './utils/message.js'
+import { message, warning, success, error, alert, prompt, confirm, loading } from './utils/message.js'
 
 export default {
     install:function(Vue, options) {
@@ -24,7 +24,7 @@ export default {
         Vue.prototype.alert = alert;
         Vue.prototype.prompt = prompt;
         Vue.prototype.confirm = confirm;
-        Vue.prototype.ObjectforIn = this.objForeach;
+        Vue.prototype.goLoading = loading;
 
         Vue.component('ComponentTable',table);
         Vue.component('ComponentDialog',dialog);

@@ -76,3 +76,15 @@ export var confirm = function (title,success,error,options,content) {
         return error && error(val);
     });
 };
+export var loading = function (message,container,icon,background,options) {
+  if (options){
+      return ElementUI.Loading.service(options);
+  }
+  return ElementUI.Loading.service({
+      target: container || document.body,
+      lock: true,
+      text: message || 'Loading',
+      spinner: icon || 'el-icon-loading',
+      background: background || 'rgba(0, 0, 0, 0.7)'
+  })
+};

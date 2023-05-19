@@ -65,12 +65,31 @@ export default {
      * 设置与获取缓存
      * @param key
      * @param val
+     * @param ttl
      * @returns {string|any|void}
      */
-    cache:function(key, val){
-        if (val) return localStorage.setItem(key, JSON.stringify(val));
+    cache:function(key, val, ttl){
+        if (val){
+            const it = {
+                value:val,
+                expired:0
+            };
+            if (ttl){
+              var time = new Date();
+              it.expired = time.getTime() + ttl;
+            }
+            return localStorage.setItem(key, JSON.stringify(it));
+        }
+        var time = new Date();
         var item = localStorage.getItem(key);
-        if (item) return JSON.parse(item);
+        if (item){
+            item = JSON.parse(item);
+            if (item.expired !==0 && time.getTime() > item.expired){
+                localStorage.removeItem(key);
+                return localStorage.getItem(key);
+            }
+            return item.value;
+        }
         return item;
     },
     /**
