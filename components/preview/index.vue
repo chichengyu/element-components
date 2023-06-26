@@ -55,7 +55,7 @@ export default {
     },
     data:function() {return {visible:false}},
     methods:{
-        remove(){
+        remove:function(){
             this.$emit('remove',this.$refs.preivew,this.params);
         }
     }
