@@ -1,9 +1,13 @@
 <template>
-    <div class="preivew" style="display:inline-block;margin-right:6px;vertical-align:middle;">
+    <div ref="preivew" class="preivew" style="display:inline-block;margin-right:6px;vertical-align:middle;">
         <template v-if="src">
-            <div class="img" @click="visible=true">
-                <span><i class="el-icon-zoom-in"></i></span>
-                <img :src="src" :width="width" :height="height" :title="title" style="border-radius:6px;vertical-align:middle">
+            <div class="img">
+                <span v-if="del" class="del" style="display:flex">
+                    <i class="el-icon-zoom-in del-add" @click="visible=true"></i>
+                    <i class="el-icon-delete del-delete" @click="remove"></i>
+                </span>
+                <span v-else><i class="el-icon-zoom-in" @click="visible=true"></i></span>
+                <img :src="src" :width="width" :height="height" :title="title" style="border-radius:6px;vertical-align:middle"/>
             </div>
             <el-dialog
                 :title="title"
@@ -14,7 +18,7 @@
             </el-dialog>
         </template>
         <template v-else>
-            <span>无</span>
+            <span><i class="el-icon-picture-outline"></i></span>
         </template>
     </div>
 </template>
@@ -39,12 +43,22 @@ export default {
             type:String,
             default: '预览'
         },
+        del:{
+            type:Boolean,
+            default: false
+        },
         appendToBody:{
             type:Boolean,
             default: false
-        }
+        },
+        params:[String,Number,Object,Array]
     },
-    data:function() {return {visible:false}}
+    data:function() {return {visible:false}},
+    methods:{
+        remove(){
+            this.$emit('remove',this.$refs.preivew,this.params);
+        }
+    }
 }
 </script>
 
@@ -81,5 +95,11 @@ export default {
     top: 50%;
     margin-left: -8px;
     margin-top: -8px;
+}
+.img > span.del > i.del-add{
+  left: 28%;
+}
+.img > span.del > i.del-delete{
+  left: 68%;
 }
 </style>

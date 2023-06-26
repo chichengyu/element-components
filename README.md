@@ -838,6 +838,8 @@ export default {
 	<hr>
 	<component-preview v-for="(item,index) in images" :key="index" :title="'查看原图'" :src="item" :appendToBody="true"></component-preview>
 
+	<!-- 所有属性 -->
+	<component-preview :title="'查看原图'" :src="url" :params="'额外参数'" :del='true' @remove="remove" :width="100" :height="100" :appendToBody="true"></component-preview>
 </div>
 
 export default {
@@ -855,6 +857,11 @@ export default {
             ],
         }
     }
+	methods:{
+		remove(dom,params){// dom:preview dom对象，params 额外参数
+			console.log(10,dom,params);
+		}
+	}
 }
 ```
 #### popover
