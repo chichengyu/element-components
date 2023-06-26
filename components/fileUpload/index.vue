@@ -2,6 +2,7 @@
     <div class="file-upload">
         <el-upload ref="fileUpload" :name="name" class="avatar-uploader"
             :action="action"
+            :multiple="more"
             :show-file-list="showFileList"
             :disabled="disabled"
             :auto-upload="autoUpload"
@@ -27,6 +28,10 @@ export default {
             default:'file',
         },
         disabled:{
+            type:Boolean,
+            default: false
+        },
+        more:{
             type:Boolean,
             default: false
         },
