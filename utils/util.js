@@ -86,7 +86,7 @@ export default {
             item = JSON.parse(item);
             if (item.expired !==0 && time.getTime() > item.expired){
                 localStorage.removeItem(key);
-                return localStorage.getItem(key);
+                return null;
             }
             return item.value;
         }
