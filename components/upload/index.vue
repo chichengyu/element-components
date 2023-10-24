@@ -1,6 +1,6 @@
 <template>
-    <div class="upload">
-        <el-upload ref="upload" :name="name" class="avatar-uploader"
+    <div :class="showFileList?'upload':'upload hidden'">
+        <el-upload ref="upload" :name="name" class="avatar-uploader" :show-file-list="true"
             :action="action"
             :disabled="disabled"
             :list-type="listType"
@@ -40,6 +40,10 @@ export default {
         name:{
             type:String,
             default:'file',
+        },
+        showFileList:{
+            type:Boolean,
+            default: true
         },
         disabled:{
             type:Boolean,
@@ -150,6 +154,9 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.upload.hidden >>> .el-upload-list--picture-card{
+  display: none;
+}
 .upload >>> .el-upload-list--picture-card .el-upload-list__item{
     width: 58px;
     height: 58px;
@@ -159,6 +166,7 @@ export default {
     height: 100%;
 }
 .upload >>> .el-upload.el-upload--picture-card{
+  position: relative;
     width: 58px;
     height: 58px;
     line-height: 58px;
